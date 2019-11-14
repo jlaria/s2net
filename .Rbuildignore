@@ -1,0 +1,6 @@
+^.git$
+^Meta$
+^doc$
+^.vscode$
+^.*\.Rproj$
+^\.Rproj\.user$

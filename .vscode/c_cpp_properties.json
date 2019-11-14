@@ -1,0 +1,20 @@
+{
+    "configurations": [
+        {
+            "name": "Linux",
+            "includePath": [
+                "${workspaceFolder}/**",
+                "/usr/share/R/include/",
+                "/home/juank/R/x86_64-pc-linux-gnu-library/3.5/Rcpp/include/",
+                "/home/juank/R/x86_64-pc-linux-gnu-library/3.5/RcppArmadillo/include/",
+                "/usr/share/R/include"
+            ],
+            "defines": [],
+            "compilerPath": "/usr/bin/clang",
+            "cStandard": "c11",
+            "cppStandard": "c++17",
+            "intelliSenseMode": "clang-x64"
+        }
+    ],
+    "version": 4
+}

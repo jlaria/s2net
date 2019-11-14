@@ -1,0 +1,12 @@
+useDynLib(nExtJTRcpp, .registration=TRUE)
+
+exportPattern(nExtJT,
+              nExtData,
+              nExtParams,
+              nExtFista,
+              fit_dummy)
+
+S3method(print, nExtData)
+S3method(print, nExtFista)
+
+import(methods, Rcpp)

@@ -1,0 +1,77 @@
+\name{Rcpp_nExtJT-class}
+\Rdversion{1.1}
+\docType{class}
+\alias{Rcpp_nExtJT-class}
+\alias{Rcpp_nExtJT}
+\alias{nExtJT}
+\alias{_rcpp_module_boot_Rcpp_nExtJT_export}
+\alias{predict,Rcpp_nExtJT-method}
+
+\title{Class \code{"Rcpp_nExtJT"}}
+\description{
+%%  ~~ A concise (1-5 lines) description of what the class is. ~~
+This is the main class of this library, implemented in C++ and exposed to \R using \code{Rcpp} modules. 
+It can be used in \R directly, although some generic S4 methods have been implemented to make it easier to interact in \R.
+}
+\section{Extends}{
+Class \code{"\linkS4class{C++Object}"}, directly.
+
+All reference classes extend and inherit methods from \code{"\linkS4class{envRefClass}"}.
+
+}
+\section{Methods}{
+  \describe{
+    \item{predict}{\code{signature(object = "Rcpp_nExtJT")}: See \code{\link{predict_Rcpp_nExtJT}}}
+	 }
+}
+%%\references{
+%%  ~~put references to the literature/web site here~~
+%%}
+\author{
+%%  ~~who you are~~
+Juan C. Laria
+}
+%%\note{
+%%  ~~further notes~~
+%%}
+
+%% ~Make other sections like Warning with \section{Warning }{....} ~
+
+%%\seealso{
+%%  ~~objects to See Also as \code{\link{~~fun~~}}, ~~~
+%%  ~~or \code{\linkS4class{CLASSNAME}} for links to other classes ~~~
+%%}
+\examples{
+showClass("Rcpp_nExtJT")
+}
+\keyword{classes}
+\section{Fields}{
+  \describe{
+    \item{\code{beta}:}{Object of class \code{matrix}. The fitted model coefficients.}
+    \item{\code{intercept}:}{ The model intercept.}
+  }
+}
+\section{Class-Based Methods}{
+  \describe{
+    \item{\code{initialize(data, loss)}:}{
+      \describe{
+      \item{\code{data} }{ \code{\link{nExtData}} object}
+      \item{\code{loss} }{Loss function: 0 = linear, 1 = logit}
+      }
+    }
+    \item{\code{setupFista(\link{nExtFista})}:}{ Configures the FISTA internal algorithm.}
+    \item{\code{predict(newX, type)}:}{
+      \describe{
+      \item{\code{newX} }{ New data \code{matrix} to make predictions.}
+      \item{\code{type} }{ 0 = default, 1 = response, 2 = probs, 3 = class}
+      }
+    }
+    \item{\code{fit(params, frame, proj)}:}{
+    \describe{
+      \item{\code{params }}{\code{\link{nExtParams}} object}
+      \item{\code{frame} }{0 = "ExtJT", 1 = "JT"}
+      \item{\code{proj} }{0 = no, 1 = yes, 2 = auto}
+    }
+    }
+  }
+}

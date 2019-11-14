@@ -1,0 +1,14 @@
+Package: nExtJTRcpp
+Type: Package
+Title: What the Package Does Using Title Case
+Version: 1.0
+Date: 2019-11-13
+Author: Juan C. Laria
+Maintainer: Juan C. Laria <laria@pm.me>
+Description: More details about what the package does. See
+              <http://cran.r-project.org/doc/manuals/r-release/R-exts.html#The-DESCRIPTION-file> for details on how to write
+              this part.
+License: GPL (>= 2)
+Imports: Rcpp (>= 1.0.2), methods
+LinkingTo: Rcpp, RcppArmadillo
+
