@@ -34,13 +34,13 @@
 arma::vec soft_thresh(const arma::vec & z, double l){
   arma::vec S = arma::vec(z.n_elem);
   for(int i=0; i<z.n_elem; i++){
-    if(fabs(z(i)) <= l){
+    if(std::abs(z[i]) <= l){
       S(i) = 0;
     }else{
-      if(z(i)<=0){
-        S(i) = z(i) + l;
+      if(z[i]<=0){
+        S[i] = z[i] + l;
       }else{
-        S(i) = z(i) - l;
+        S[i] = z[i] - l;
       }
     }
   }
@@ -163,8 +163,9 @@ nExtJT::nExtJT(const Rcpp::List & nExtData, int loss)
 }
 
 arma::vec nExtJT::Update(arma::vec beta, arma::vec gradL_beta, double t){
-    arma::vec S1 = soft_thresh(beta - t*gradL_beta, t*lambda1);
-    return S1/(1 + 2*t*lambda2);
+    // arma::vec S1 = soft_thresh(beta - t*gradL_beta, t*lambda1);
+    // return S1/(1 + 2*t*lambda2);
+    return soft_thresh(beta - t*gradL_beta, t*lambda1)/(1 + 2*t*lambda2);
 }
 
 void nExtJT::setupFista(const Rcpp::List & nExtFista){
@@ -222,7 +223,7 @@ void nExtJT::fit(const arma::vec & params, int frame, int proj){
     // Should we use the default version or not?
     if (use_default)
     {
-        // This one is compiled with #define stuff that makes it 100x faster
+        // This one is compiled with #define stuff that makes it... faster?
         optimizeFista(); 
     }else{
         optimizeFista_user();
@@ -261,8 +262,7 @@ void nExtJT::optimizeFista(){
         
         //Find t such that R_updated <= R + t(g)*(beta_updated - beta) + 1/2t||beta_updated - beta||_2^2
         theta_new = Update(beta, g, t);
-        while (arma::as_scalar(L(theta_new)) > 
-                          arma::as_scalar(L_beta + g.t()*(theta_new - beta) + 1/(2*t)*arma::sum(arma::square(theta_new - beta)))){
+        while (  L(theta_new) > L_beta + arma::as_scalar(g.t()*(theta_new - beta)) + 1/(2*t)*arma::sum(arma::square(theta_new - beta))){
             t = FISTA_STEP*t;
             theta_new = Update(beta, g, t);
         }
