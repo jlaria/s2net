@@ -25,6 +25,10 @@
 #define TYPE_PREDICT_PROB 2
 #define TYPE_PREDICT_CLASS 3
 
+#define FISTA_MAX_ITER_INNER 50000
+#define FISTA_TOL 1e-7
+#define FISTA_T0 2
+#define FISTA_STEP 0.1
 
 // Soft-threshold operator
 arma::vec soft_thresh(const arma::vec & z, double l){
@@ -70,11 +74,12 @@ private:
     arma::vec s_center;
     arma::vec rm_cols;
 
-    int MAX_ITER_INNER;
-    int TOL;
-    double t0;
-    double step;
     bool use_warmstart;
+    int Arg_FISTA_MAX_ITER_INNER;
+    double Arg_FISTA_TOL;
+    double Arg_FISTA_T0;
+    double Arg_FISTA_STEP;
+    bool use_default;
 
 public:
     nExtJT(const Rcpp::List & nExtData, int loss);
@@ -82,6 +87,7 @@ public:
     void fit(const arma::vec & params, int frame, int proj);
     void setupFista(const Rcpp::List & nExtFista);
     void optimizeFista();
+    void optimizeFista_user();
     arma::vec predict_response(const arma::mat & newX);
     arma::vec predict_probability(const arma::mat & newX);
     arma::vec predict_class(const arma::mat & newX);
@@ -129,11 +135,8 @@ nExtJT::nExtJT(const Rcpp::List & nExtData, int loss)
     gamma2 = 0;
     gamma3 = 0;
 
-    MAX_ITER_INNER = 50000;
-    TOL = 1e-7;
-    t0 = 2;
-    step = 0.1;
     use_warmstart = FALSE;
+    use_default = TRUE;
 
     beta = arma::zeros(p);
 
@@ -165,13 +168,25 @@ arma::vec nExtJT::Update(arma::vec beta, arma::vec gradL_beta, double t){
 }
 
 void nExtJT::setupFista(const Rcpp::List & nExtFista){
-    MAX_ITER_INNER = nExtFista["MAX_ITER_INNER"];
-    TOL = nExtFista["TOL"];
-    t0 = nExtFista["t0"];
-    step = nExtFista["step"];
+    Arg_FISTA_MAX_ITER_INNER = nExtFista["MAX_ITER_INNER"];
+    Arg_FISTA_TOL = nExtFista["TOL"];
+    Arg_FISTA_T0 = nExtFista["t0"];
+    Arg_FISTA_STEP = nExtFista["step"];
     use_warmstart = nExtFista["use_warmstart"];
+    use_default = FALSE;
 }
-void nExtJT::fit_fast(){
+
+void nExtJT::fit(const arma::vec & params, int frame, int proj){
+    // Update params
+    lambda1 = params[0];
+    lambda2 = params[1];
+    gamma1 = params[2];
+    gamma2 = params[3];
+    gamma3 = params[4];
+
+    this->frame = frame;
+    this->proj = proj;
+
     // Should we transform the unlabeled data before projecting?
     if(proj != TYPE_PROJ_NO){
             arma::rowvec u = arma::mean(xU, 0);
@@ -198,30 +213,24 @@ void nExtJT::fit_fast(){
             break;
           }
 
-    // is warm start?
+    // is warm start used?
     if(!use_warmstart){
         beta = arma::zeros(p);
     }
     // call FISTA
-    this->optimizeFista();
-}
-
-void nExtJT::fit(const arma::vec & params, int frame, int proj){
-    // Update params
-    lambda1 = params[0];
-    lambda2 = params[1];
-    gamma1 = params[2];
-    gamma2 = params[3];
-    gamma3 = params[4];
-
-    this->frame = frame;
-    this->proj = proj;
-
-    this->fit_fast();
+    // Very important!!!
+    // Should we use the default version or not?
+    if (use_default)
+    {
+        // This one is compiled with #define stuff that makes it 100x faster
+        optimizeFista(); 
+    }else{
+        optimizeFista_user();
+    }
 }
 
 void nExtJT::optimizeFista(){
-    double t = t0;
+    double t = FISTA_T0;
     double l_new = 1;
     double l_old = 1;
     int iter = 0;
@@ -237,8 +246,8 @@ void nExtJT::optimizeFista(){
     double L_null = L(arma::zeros(p));
     
     //std::printf("NULL: %.6f\n", L_null);
-    
-    do{
+    for (int iter = 0; iter < FISTA_MAX_ITER_INNER; iter++)
+    {
         // This is U_{t_k-1}(\bbeta_{k-1})
         theta_old = theta_new;  
         l_old = l_new;
@@ -252,9 +261,9 @@ void nExtJT::optimizeFista(){
         
         //Find t such that R_updated <= R + t(g)*(beta_updated - beta) + 1/2t||beta_updated - beta||_2^2
         theta_new = Update(beta, g, t);
-        while ( arma::as_scalar(L(theta_new)) > 
-                    arma::as_scalar(L_beta + g.t()*(theta_new - beta) + 1/(2*t)*arma::sum(arma::square(theta_new - beta)))){
-            t = step*t;
+        while (arma::as_scalar(L(theta_new)) > 
+                          arma::as_scalar(L_beta + g.t()*(theta_new - beta) + 1/(2*t)*arma::sum(arma::square(theta_new - beta)))){
+            t = FISTA_STEP*t;
             theta_new = Update(beta, g, t);
         }
         
@@ -267,13 +276,67 @@ void nExtJT::optimizeFista(){
         
         // Compute the new risk
         L_beta_new = L(beta);
-    }while(
-            // Condition 1:
-            std::abs(L_beta_new - L_beta) > TOL * L_null  && 
-                // Condition 2
-                iter < MAX_ITER_INNER
-    );
+
+        if(std::abs(L_beta_new - L_beta) > FISTA_TOL * L_null){
+            break;
+        }
+    }
 }
+
+void nExtJT::optimizeFista_user(){
+    double t = Arg_FISTA_T0;
+    double l_new = 1;
+    double l_old = 1;
+    int iter = 0;
+    
+    arma::vec theta_new = beta;
+    arma::vec theta_old;
+    arma::vec g;
+    
+    
+    double L_beta_new = L(beta);
+    double L_beta = L_beta_new;
+    // Null model's loss
+    double L_null = L(arma::zeros(p));
+    
+    //std::printf("NULL: %.6f\n", L_null);
+    for (int iter = 0; iter < Arg_FISTA_MAX_ITER_INNER; iter++)
+    {
+        // This is U_{t_k-1}(\bbeta_{k-1})
+        theta_old = theta_new;  
+        l_old = l_new;
+        
+        // Compute the gradient in beta_k
+        g = gradL(beta);
+        
+        // Compute the risk in beta_k
+        L_beta = L_beta_new;
+        //std::printf("Risk: %.6f\n", L_beta);
+        
+        //Find t such that R_updated <= R + t(g)*(beta_updated - beta) + 1/2t||beta_updated - beta||_2^2
+        theta_new = Update(beta, g, t);
+        while (arma::as_scalar(L(theta_new)) > 
+                          arma::as_scalar(L_beta + g.t()*(theta_new - beta) + 1/(2*t)*arma::sum(arma::square(theta_new - beta)))){
+            t = Arg_FISTA_STEP*t;
+            theta_new = Update(beta, g, t);
+        }
+        
+        // Compute the aceleration term
+        l_new = (1 + sqrt(1 + 4*pow(l_old, 2)))/2;
+        
+        // Update beta
+        beta = theta_new + (l_old - 1)*(theta_new - theta_old)/l_new;
+        iter ++;
+        
+        // Compute the new risk
+        L_beta_new = L(beta);
+
+        if(std::abs(L_beta_new - L_beta) > Arg_FISTA_TOL * L_null){
+            break;
+        }
+    }
+}
+
 arma::vec nExtJT::predict_response(const arma::mat & newX){
     // Asume that newX in the same space as xL, xU
     arma::vec eta = newX*beta;
@@ -322,21 +385,6 @@ arma::vec nExtJT::predict(const arma::mat & newX, int type){
         break;
     }
 }
-
-// [[Rcpp::export]]
-arma::vec fit_dummy(
-    const Rcpp::List & data,
-    const arma::vec & params,
-    int loss,
-    int frame,
-    int proj){
-  
-  nExtJT obj(data, loss);
-  //obj.fit(params, frame, proj);
-  
-  return obj.get_beta();
-}
-
 
 // Expose class nExtJT
 RCPP_MODULE(Rcpp_nExtJT_export){
