@@ -79,4 +79,4 @@ function (lambda1, lambda2 = 0, gamma1 = 0, gamma2 = 0, gamma3 = 0)
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.
-\keyword{ hyper-parameters }% use one of  RShowDoc("KEYWORDS")
+%%\keyword{  }% use one of  RShowDoc("KEYWORDS")

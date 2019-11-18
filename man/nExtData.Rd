@@ -59,6 +59,8 @@ In addition the following attributes are stored.
 \item{pr:rm_cols }{logical vector of removed columns}
 \item{pr:center }{column center}
 \item{pr:scale }{column scale}
+\item{pr:ycenter }{yL center. Regression}
+\item{pr:yscale }{yL scale. Regression}
 }
 %%\references{
 %% ~put references to the literature/web site here ~
@@ -78,11 +80,33 @@ Juan C. Laria
 \code{\link{nExtFista}}
 }
 \examples{
-##---- Should be DIRECTLY executable !! ----
-##-- ==>  Define data, use random,
-##--	or do  help(data=index)  for the standard data sets.
+data("auto_mpg")
+
+train = nExtData( xL = auto_mpg$P1$xL,
+                  yL = auto_mpg$P1$yL,
+                  xU = auto_mpg$P1$xU,
+                  preprocess = TRUE )
+show(train)
+
+# Notice how ordered factor variable $cylinders is handled 
+# .L (linear) .Q (quadratic) .C (cubic) and .^4
+head(train$xL) 
+
+
+#if you want to do validation with the unlabeled data
+idx = sample(length(auto_mpg$P1$yU), 200)
+
+train = nExtData(xL = auto_mpg$P1$xL, yL = auto_mpg$P1$yL, xU = auto_mpg$P1$xU[idx, ])
+
+valid = nExtData(xL = auto_mpg$P1$xU[-idx, ], yL = auto_mpg$P1$yU[-idx], preprocess = train)
+
+test = nExtData(xL = auto_mpg$P1$xU[idx, ], yL = auto_mpg$P1$yU[idx], preprocess = train)
+
+train
+valid
+test
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.
-\keyword{ ~preprocess }% use one of  RShowDoc("KEYWORDS")
-\keyword{ ~data }% __ONLY ONE__ keyword per line
+\keyword{manip}% use one of  RShowDoc("KEYWORDS")
+%% \keyword{ ~data }% __ONLY ONE__ keyword per line

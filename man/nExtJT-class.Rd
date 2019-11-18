@@ -7,17 +7,11 @@
 \alias{_rcpp_module_boot_Rcpp_nExtJT_export}
 \alias{predict,Rcpp_nExtJT-method}
 
-\title{Class \code{"Rcpp_nExtJT"}}
+\title{Class \code{nExtJT}}
 \description{
 %%  ~~ A concise (1-5 lines) description of what the class is. ~~
 This is the main class of this library, implemented in C++ and exposed to \R using \code{Rcpp} modules. 
 It can be used in \R directly, although some generic S4 methods have been implemented to make it easier to interact in \R.
-}
-\section{Extends}{
-Class \code{"\linkS4class{C++Object}"}, directly.
-
-All reference classes extend and inherit methods from \code{"\linkS4class{envRefClass}"}.
-
 }
 \section{Methods}{
   \describe{
@@ -42,9 +36,39 @@ Juan C. Laria
 %%  ~~or \code{\linkS4class{CLASSNAME}} for links to other classes ~~~
 %%}
 \examples{
-showClass("Rcpp_nExtJT")
+data("auto_mpg")
+train = nExtData(xL = auto_mpg$P1$xL, yL = auto_mpg$P1$yL,  xU = auto_mpg$P1$xU)
+
+# We create the C++ object calling the new method (constructor)
+obj = new(nExtJT, train, 0) # 0 = regression 
+obj
+
+# We call directly the $fit method of obj, 
+obj$fit(nExtParams(lambda1 = 0.01, 
+                   lambda2 = 0.01, 
+                   gamma1 = 0.05, 
+                   gamma2 = 100, 
+                   gamma3 = 0.05), 1, 2)
+# fitted model
+obj$beta
+
+# We can test the results using the unlabeled data
+test = nExtData(xL = auto_mpg$P1$xU, yL = auto_mpg$P1$yU,  preprocess = train)
+ypred = obj$predict(test$xL, 0)
+
+\dontrun{
+if(require(ggplot2)){
+  ggplot() + 
+    aes(x = ypred, y = test$yL) + geom_point() + 
+    geom_abline(intercept = 0, slope = 1, linetype = 2)
 }
-\keyword{classes}
+}
+
+}
+\keyword{optimize}
+\keyword{models}
+\keyword{regression}
+
 \section{Fields}{
   \describe{
     \item{\code{beta}:}{Object of class \code{matrix}. The fitted model coefficients.}
@@ -69,7 +93,7 @@ showClass("Rcpp_nExtJT")
     \item{\code{fit(params, frame, proj)}:}{
     \describe{
       \item{\code{params }}{\code{\link{nExtParams}} object}
-      \item{\code{frame} }{0 = "ExtJT", 1 = "JT"}
+      \item{\code{frame} }{0 = "JT", 1 = "ExtJT"}
       \item{\code{proj} }{0 = no, 1 = yes, 2 = auto}
     }
     }

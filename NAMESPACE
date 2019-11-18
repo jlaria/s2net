@@ -4,9 +4,13 @@ exportPattern(nExtJT,
               nExtData,
               nExtParams,
               nExtFista,
-              fit_dummy)
+              nExtJTR,
+              simulate_extra,
+              shootout_data)
 
 S3method(print, nExtData)
 S3method(print, nExtFista)
+S3method(predict, nExtJTR)
 
 import(methods, Rcpp)
+importFrom("stats", "rbinom", "rnorm")

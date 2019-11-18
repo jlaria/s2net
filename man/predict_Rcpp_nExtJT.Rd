@@ -62,4 +62,4 @@ Juan C. Laria
 %%}
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.
-\keyword{ ~predict }% use one of  RShowDoc("KEYWORDS")
+% \keyword{}% use one of  RShowDoc("KEYWORDS")

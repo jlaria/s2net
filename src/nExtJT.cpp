@@ -99,7 +99,9 @@ public:
 
     // get/set 
     arma::vec get_beta(){return beta;}
+    void set_beta(arma::vec beta){this->beta = beta;}
     double get_intercept(){return intercept;}
+    void set_intercept(double intercept){this->intercept = intercept;}
 };
 
 
@@ -339,7 +341,7 @@ void nExtJT::optimizeFista_user(){
 
 arma::vec nExtJT::predict_response(const arma::mat & newX){
     // Asume that newX in the same space as xL, xU
-    arma::vec eta = newX*beta;
+    arma::vec eta = newX*beta + intercept;
     return eta;
 }
 
@@ -398,8 +400,8 @@ RCPP_MODULE(Rcpp_nExtJT_export){
 
     .method("predict", &nExtJT::predict, "Predicts response vector")
 
-    .property("beta", &nExtJT::get_beta)
-    .property("intercept", &nExtJT::get_intercept)
+    .property("beta", &nExtJT::get_beta, &nExtJT::set_beta)
+    .property("intercept", &nExtJT::get_intercept, &nExtJT::set_intercept)
 
     ;
 }

@@ -81,4 +81,4 @@ function (MAX_ITER_INNER = 5000, TOL = 1e-07, t0 = 2, step = 0.1,
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.
-\keyword{ fista }% use one of  RShowDoc("KEYWORDS")
+\keyword{optimize}% use one of  RShowDoc("KEYWORDS")

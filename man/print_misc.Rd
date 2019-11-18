@@ -59,5 +59,5 @@ S3 object of class \code{nExtData} or \code{nExtFista}
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.
-\keyword{ print }% use one of  RShowDoc("KEYWORDS")
-\keyword{ show }% __ONLY ONE__ keyword per line
+\keyword{methods}% use one of  RShowDoc("KEYWORDS")
+%\keyword{}% __ONLY ONE__ keyword per line

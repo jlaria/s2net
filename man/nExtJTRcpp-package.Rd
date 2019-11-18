@@ -2,8 +2,31 @@
 \alias{nExtJTRcpp}
 \docType{package}
 \title{\packageTitle{nExtJTRcpp}}
-\description{\packageDescription{nExtJTRcpp}}
-\section{Package Content}{\packageIndices{nExtJTRcpp}}
-\author{\packageAuthor{nExtJTRcpp}}
-\section{Maintainer}{\packageMaintainer{nExtJTRcpp}}
+\description{ 
+\if{html}{\figure{nExtJT.png}{options: width=100 align='right'}}
+  \packageDescription{nExtJTRcpp}
+}
+\details{
+  The DESCRIPTION file: \packageDESCRIPTION{nExtJTRcpp}
+  \packageIndices{nExtJTRcpp}
+
+  This section should provide a more detailed overview of how to use the
+  package, including the most important functions.
+  }
+\author{
+  \packageAuthor{nExtJTRcpp}
+}
+\references{
+  This optional section can contain literature or other references for
+  background information.
+}
+% Optionally other standard keywords, one per line,
+% from the file KEYWORDS in the R documentation.
 \keyword{package}
+\seealso{
+  Optional links to other man pages
+}
+\examples{
+  ## Optional simple examples of the most important functions
+  ## Use \dontrun{} around code to be shown but not executed
+}

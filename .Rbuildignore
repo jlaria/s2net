@@ -1,3 +1,4 @@
+^data-raw$
 ^.git$
 ^Meta$
 ^doc$
