@@ -1,4 +1,4 @@
-nExtJTR <- function(data, params, loss = "default", frame = "ExtJT", proj = "auto", fista = NULL){
+nExtJTR <- function(data, params, loss = "default", frame = "ExtJT", proj = "auto", fista = NULL, S3 = TRUE){
   
   switch (loss,
     logit = {type_loss = 1},
@@ -31,20 +31,25 @@ nExtJTR <- function(data, params, loss = "default", frame = "ExtJT", proj = "aut
   
   obj$fit(params, type_frame, type_proj)
   
-  ret = list(
-    nExtData = data,
-    nExtParams = params,
-    nExtFista = fista,
-    loss = loss,
-    type_loss = type_loss,
-    frame = frame,
-    type_frame = type_frame,
-    proj = proj,
-    type_proj = type_proj,
-    beta = obj$beta,
-    intercept = obj$intercept
-  )
-  class(ret) = "nExtJTR"
+  if(S3){
+    ret = list(
+      nExtData = data,
+      nExtParams = params,
+      nExtFista = fista,
+      loss = loss,
+      type_loss = type_loss,
+      frame = frame,
+      type_frame = type_frame,
+      proj = proj,
+      type_proj = type_proj,
+      beta = obj$beta,
+      intercept = obj$intercept
+    )
+    class(ret) = "nExtJTR"
+  }else{
+    ret = obj
+  }
+  
   return(ret)
 }
 

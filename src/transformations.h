@@ -1,6 +1,6 @@
 // Tranformations
 
-#include "RcppArmadillo.h"
+// #include "RcppArmadillo.h"
 
 #define TYPE_TRANSFORM_JT 0
 #define TYPE_TRANSFORM_ExtJT 1

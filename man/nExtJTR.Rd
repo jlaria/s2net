@@ -10,7 +10,8 @@ Trains a generalized extended linear joint trained model using semi-supervised d
 This function is a wrapper for the class \code{\link{nExtJT}}. It creates the C++ object and fits the model using input \code{data}.
 }
 \usage{
-nExtJTR(data, params, loss = "default", frame = "ExtJT", proj = "auto", fista = NULL)
+nExtJTR(data, params, loss = "default", frame = "ExtJT", proj = "auto", 
+        fista = NULL, S3 = TRUE)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -38,6 +39,10 @@ Should the unlabeled data be shifted to remove the model's effect? One of \code{
 %%     ~~Describe \code{fista} here~~
 Fista setup parameters. An object of class \code{\link{nExtFista}}.
 }
+  \item{S3}{
+%%     ~~Describe \code{fista} here~~
+Boolean: should the method return an S3 object (default) or a C++ object?
+}
 }
 %%\details{
 %%  ~~ If necessary, more details than the description above ~~
@@ -48,7 +53,7 @@ Fista setup parameters. An object of class \code{\link{nExtFista}}.
 %%  \item{comp1 }{Description of 'comp1'}
 %%  \item{comp2 }{Description of 'comp2'}
 %% ...
-Returns an object of S3 class \code{nExtJTR}
+Returns an object of S3 class \code{nExtJTR} or a C++ object of class \code{\link{nExtJT}}
 }
 \references{
 %% ~put references to the literature/web site here ~

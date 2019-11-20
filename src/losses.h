@@ -1,6 +1,6 @@
 // losses.h
 
-#include "RcppArmadillo.h"
+//#include "RcppArmadillo.h"
 #include<string> // for string class 
 
 #define LOSS_LINEAR 0
