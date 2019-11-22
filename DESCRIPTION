@@ -10,5 +10,6 @@ Description: More details about what the package does. See
               this part.
 License: GPL (>= 2)
 Imports: Rcpp, methods
+Depends: stats, MASS
 LinkingTo: Rcpp, RcppArmadillo
 

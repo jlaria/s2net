@@ -13,4 +13,5 @@ S3method(print, nExtFista)
 S3method(predict, nExtJTR)
 
 import(methods, Rcpp)
-importFrom("stats", "rbinom", "rnorm")
+importFrom("stats", "rbinom", "rnorm", "runif", "sd")
+importFrom("MASS", "mvrnorm")
