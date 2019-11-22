@@ -3,7 +3,6 @@
 \docType{class}
 \alias{Rcpp_nExtJT-class}
 \alias{Rcpp_nExtJT}
-\alias{nExtJT}
 \alias{_rcpp_module_boot_Rcpp_nExtJT_export}
 \alias{predict,Rcpp_nExtJT-method}
 

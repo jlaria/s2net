@@ -1,4 +1,4 @@
-useDynLib(nExtJTRcpp, .registration=TRUE)
+useDynLib(nExtJT, .registration=TRUE)
 
 exportPattern(nExtJT,
               nExtData,

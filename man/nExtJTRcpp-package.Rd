@@ -1,20 +1,20 @@
-\name{nExtJTRcpp-package}
-\alias{nExtJTRcpp}
+\name{nExtJT-package}
+\alias{nExtJT}
 \docType{package}
-\title{\packageTitle{nExtJTRcpp}}
+\title{\packageTitle{nExtJT}}
 \description{ 
 \if{html}{\figure{nExtJT.png}{options: width=100 align='right'}}
-  \packageDescription{nExtJTRcpp}
+  \packageDescription{nExtJT}
 }
 \details{
-  The DESCRIPTION file: \packageDESCRIPTION{nExtJTRcpp}
-  \packageIndices{nExtJTRcpp}
+  The DESCRIPTION file: \packageDESCRIPTION{nExtJT}
+  \packageIndices{nExtJT}
 
   This section should provide a more detailed overview of how to use the
   package, including the most important functions.
   }
 \author{
-  \packageAuthor{nExtJTRcpp}
+  \packageAuthor{nExtJT}
 }
 \references{
   This optional section can contain literature or other references for
