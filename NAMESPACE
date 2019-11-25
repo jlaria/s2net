@@ -6,7 +6,7 @@ exportPattern(nExtJT,
               nExtFista,
               nExtJTR,
               simulate_extra,
-              shootout_data)
+              simulate_groups)
 
 S3method(print, nExtData)
 S3method(print, nExtFista)

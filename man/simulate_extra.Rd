@@ -8,15 +8,20 @@ Simulate extrapolated data
 \description{
 %%  ~~ A concise (1-5 lines) description of what the function does. ~~
 Simulated data scenarios described in the paper from Ryan and Culp (2015). 
+
+\if{html}{\figure{sim_extra.jpg}{options: width=300 align='center'}}
 }
 \usage{
-simulate_extra(n = 100, p = 1000, shift = 10, 
+simulate_extra(n_source = 100, n_target = 100, p = 1000, shift = 10, 
                scenario = "same", response = "linear", sigma2 = 2.5)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
-  \item{n}{
-Number of samples in each subset (labeled and unlabeled)
+  \item{n_source}{
+Number of source samples (labeled)
+}
+  \item{n_target}{
+Number of target samples (unlabeled)
 }
   \item{p}{
 %%     ~~Describe \code{p} here~~
@@ -60,10 +65,10 @@ A list, with
 %% ~put references to the literature/web site here ~
 Ryan, K. J., & Culp, M. V. (2015). On semi-supervised linear regression in covariate shift problems. \emph{The Journal of Machine Learning Research, 16}(1), 3183-3217.
 }
-\author{
+%\author{
 %%  ~~who you are~~
-Juan C. Laria
-}
+%Juan C. Laria
+%}
 %\note{
 %%  ~~further notes~~
 %}

@@ -25,10 +25,10 @@
 #define TYPE_PREDICT_PROB 2
 #define TYPE_PREDICT_CLASS 3
 
-#define FISTA_MAX_ITER_INNER 50000
-#define FISTA_TOL 1e-7
-#define FISTA_T0 2
-#define FISTA_STEP 0.1
+#define FISTA_MAX_ITER_INNER 5000
+#define FISTA_TOL 1e-5
+#define FISTA_T0 1
+#define FISTA_STEP 0.8
 
 // Soft-threshold operator
 arma::vec soft_thresh(const arma::vec & z, double l){
@@ -248,9 +248,13 @@ void nExtJT::optimizeFista(){
     // Null model's loss
     double L_null = L(arma::zeros(p));
     
-    //std::printf("NULL: %.6f\n", L_null);
-    for (int iter = 0; iter < FISTA_MAX_ITER_INNER; iter++)
+    // Check that the optimal beta is not zero (global)
+    if (arma::abs(gradL(arma::zeros(p))).max() <= lambda1)
     {
+        beta = arma::zeros(p);
+    }else{
+        for (int iter = 0; iter < FISTA_MAX_ITER_INNER; iter++)
+        {
         // This is U_{t_k-1}(\bbeta_{k-1})
         theta_old = theta_new;  
         l_old = l_new;
@@ -279,10 +283,12 @@ void nExtJT::optimizeFista(){
         // Compute the new risk
         L_beta_new = L(beta);
 
-        if(std::abs(L_beta_new - L_beta) > FISTA_TOL * L_null){
+        if(std::abs(L_beta_new - L_beta) < FISTA_TOL * L_null){
             break;
         }
+        }
     }
+     
 }
 
 void nExtJT::optimizeFista_user(){
@@ -301,7 +307,11 @@ void nExtJT::optimizeFista_user(){
     // Null model's loss
     double L_null = L(arma::zeros(p));
     
-    //std::printf("NULL: %.6f\n", L_null);
+    // Check that the optimal beta is not zero (global)
+    if (arma::abs(gradL(arma::zeros(p))).max() <= lambda1)
+    {
+        beta = arma::zeros(p);
+    }else{
     for (int iter = 0; iter < Arg_FISTA_MAX_ITER_INNER; iter++)
     {
         // This is U_{t_k-1}(\bbeta_{k-1})
@@ -333,9 +343,10 @@ void nExtJT::optimizeFista_user(){
         // Compute the new risk
         L_beta_new = L(beta);
 
-        if(std::abs(L_beta_new - L_beta) > Arg_FISTA_TOL * L_null){
+        if(std::abs(L_beta_new - L_beta) < Arg_FISTA_TOL * L_null){
             break;
         }
+    }
     }
 }
 

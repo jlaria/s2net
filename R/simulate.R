@@ -1,20 +1,20 @@
 # simulated data
 
-simulate_extra <- function(n = 100, p = 1000, shift = 10, scenario = "same", response = "linear", sigma2 = 2.5){
-  xL = matrix(rnorm(n*p, 0, 0.4), ncol = p)
+simulate_extra <- function(n_source = 100, n_target = 100, p = 1000, shift = 10, scenario = "same", response = "linear", sigma2 = 2.5){
+  xL = matrix(rnorm(n_source*p, 0, 0.4), ncol = p)
   
   switch (scenario,
           same = {
             beta_lucky = 5*c(rep(1, 5),rep(-1, 5), rep(0, p - 10))/sqrt(10)
             
-            xU = matrix(rnorm(n*p, 0, 0.4), ncol = p)
+            xU = matrix(rnorm(n_target*p, 0, 0.4), ncol = p)
             etaL = xL %*% beta_lucky
             etaU = xU %*% beta_lucky 
           },
           lucky = {
             beta_lucky = 5*c(rep(1, 5),rep(-1, 5), rep(0, p - 10))/sqrt(10)
             
-            xU = matrix(rnorm(n*p, 0, 0.4), ncol = p)
+            xU = matrix(rnorm(n_target*p, 0, 0.4), ncol = p)
             xU[,1:10] = xU[,1:10] + shift
             
             etaL = xL %*% beta_lucky
@@ -23,7 +23,7 @@ simulate_extra <- function(n = 100, p = 1000, shift = 10, scenario = "same", res
           unlucky = {
             beta_unlucky = 5*c(rep(1, 10), rep(0, p - 10))/sqrt(10)
             
-            xU = matrix(rnorm(n*p, 0, 0.4), ncol = p)
+            xU = matrix(rnorm(n_target*p, 0, 0.4), ncol = p)
             xU[,1:10] = xU[,1:10] + shift
             
             etaL = xL %*% beta_unlucky
@@ -33,12 +33,12 @@ simulate_extra <- function(n = 100, p = 1000, shift = 10, scenario = "same", res
   
   switch (response,
           linear = {
-            yL = etaL +  rnorm(n, 0, sqrt(sigma2))
-            yU = etaU +  rnorm(n, 0, sqrt(sigma2))
+            yL = etaL +  rnorm(n_source, 0, sqrt(sigma2))
+            yU = etaU +  rnorm(n_target, 0, sqrt(sigma2))
           },
           logit = {
-            yL = as.factor(rbinom(n, 1, 1/(1 + exp(-etaL))))
-            yU = as.factor(rbinom(n, 1, 1/(1 + exp(-etaU))))
+            yL = as.factor(rbinom(n_source, 1, 1/(1 + exp(-etaL))))
+            yU = as.factor(rbinom(n_target, 1, 1/(1 + exp(-etaU))))
           }
   )
   
