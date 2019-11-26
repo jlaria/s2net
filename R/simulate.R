@@ -52,20 +52,21 @@ simulate_extra <- function(n_source = 100, n_target = 100, p = 1000, shift = 10,
   )
 }
 
-x_2_grp = function(N, p1, var1, cor1, p2, var2, cor2){
+x_2_grp = function(N, p1, var1, cor1, p2, var2, cor2, mu){
   S = matrix(cor1, nrow = p1, ncol = p1)
   diag(S) = var1
-  X1 = mvrnorm(N, mu = rep(0, p1), Sigma = S)
+  X1 = mvrnorm(N, mu = mu[1:p1], Sigma = S)
   S = matrix(cor2, nrow = p2, ncol = p2)
   diag(S) = var2
-  X2 = mvrnorm(N, mu = rep(0, p2), Sigma = S)
+  X2 = mvrnorm(N, mu = mu[(p1+1):(p1+p2)], Sigma = S)
   cbind(X1, X2)
 }
 
 simulate_groups = function(n_source = 100, n_target = 100, p = 200, response = "linear"){
   
-  xL = x_2_grp(n_source, p/2, 1, 0.8, p/2, 0.05, 0.01)
-  xU = x_2_grp(n_target, p/2, .1, 0.01, p/2, 1, 0.5) 
+  xL = x_2_grp(n_source, p/2, 1, 0.8, p/2, 0.05, 0.01, rep(0, p)) #cos(seq(0, 4*pi, length.out = p))
+  
+  xU = x_2_grp(n_target, p/2, .1, 0.01, p/2, 1, 0.5, rep(0, p)) #sin(seq(0, 4*pi, length.out = p))
   
   beta.S = rep(0, p)
   beta.S[sample(1:floor(p/2), 5)] = 1
@@ -85,10 +86,10 @@ simulate_groups = function(n_source = 100, n_target = 100, p = 200, response = "
     },
     logit = {
       yL = xL %*% beta.S
-      yL = rbinom(n_source, size = 1, prob =  (1 + exp(-yL))^-1)
+      yL = as.factor(rbinom(n_source, size = 1, prob =  (1 + exp(-yL))^-1))
       
       yU = xU %*% beta.T
-      yU = rbinom(n_target, size = 1, prob =  (1 + exp(-yU))^-1)
+      yU = as.factor(rbinom(n_target, size = 1, prob =  (1 + exp(-yU))^-1))
       
     }
   )

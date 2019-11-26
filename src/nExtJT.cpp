@@ -25,10 +25,10 @@
 #define TYPE_PREDICT_PROB 2
 #define TYPE_PREDICT_CLASS 3
 
-#define FISTA_MAX_ITER_INNER 5000
-#define FISTA_TOL 1e-5
-#define FISTA_T0 1
-#define FISTA_STEP 0.8
+#define FISTA_MAX_ITER_INNER 50000
+#define FISTA_TOL 1e-7
+#define FISTA_T0 2
+#define FISTA_STEP 0.1
 
 // Soft-threshold operator
 arma::vec soft_thresh(const arma::vec & z, double l){
