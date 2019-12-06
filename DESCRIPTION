@@ -1,15 +1,13 @@
 Package: nExtJT
 Type: Package
-Title: What the Package Does Using Title Case
+Title: The Generalized Extended Joint Trained Framework for R
 Version: 1.0
 Date: 2019-11-13
-Author: Juan C. Laria
+Author: Juan C. Laria, Line H. Clemmensen
 Maintainer: Juan C. Laria <laria@pm.me>
-Description: More details about what the package does. See
-              <http://cran.r-project.org/doc/manuals/r-release/R-exts.html#The-DESCRIPTION-file> for details on how to write
-              this part.
+Description: This package features the semi-supervised Generalized Extended Joint Trained Framework. This method extends the supervised elastic-net problem, and thus it is an ideal solution to the problem of feature selection in semi-supervised contexts. Its mathematical formulation is presented from a general perspective, covering a wide range of models.  We focus on linear and logistic responses, but the implementation could be easily extended to other losses ingeneralized linear models. We develop a flexible and fast implementation, written in C++ using RcppArmadillo and integrated into R via Rcpp modules.
 License: GPL (>= 2)
-Imports: Rcpp, methods
-Depends: stats, MASS
+Imports: Rcpp, methods, MASS
+Depends: stats
 LinkingTo: Rcpp, RcppArmadillo
 
