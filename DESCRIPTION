@@ -10,4 +10,10 @@ License: GPL (>= 2)
 Imports: Rcpp, methods, MASS
 Depends: stats
 LinkingTo: Rcpp, RcppArmadillo
-
+Suggests: 
+    knitr,
+    rmarkdown,
+    glmnet,
+    Metrics,
+    testthat
+VignetteBuilder: knitr

@@ -109,7 +109,11 @@ nExtJT::nExtJT(const Rcpp::List & nExtData, int loss)
 {
     this->xL = Rcpp::as<arma::mat>(nExtData["xL"]);
     this->yL = Rcpp::as<arma::mat>(nExtData["yL"]);
-    this->xU = Rcpp::as<arma::mat>(nExtData["xU"]);
+    if(Rf_isNull(nExtData["xU"])){
+        this->xU = xL.rows(1,2);
+    }else{
+        this->xU = Rcpp::as<arma::mat>(nExtData["xU"]);
+    }
     this->s_scale = Rcpp::as<arma::vec>(nExtData.attr("pr:scale"));
     this->s_center = Rcpp::as<arma::vec>(nExtData.attr("pr:center"));
     this->rm_cols = Rcpp::as<arma::vec>(nExtData.attr("pr:rm_cols"));

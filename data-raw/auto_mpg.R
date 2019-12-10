@@ -40,3 +40,4 @@ auto_mpg = list(
 
 promptData(auto_mpg, "man/data_mpg.Rd")
 usethis::use_data(auto_mpg)
+save(auto_mpg, file = "data/auto_mpg.rdata", version = 2)

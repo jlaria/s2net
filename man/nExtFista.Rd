@@ -64,21 +64,7 @@ A fast iterative shrinkage-thresholding algorithm for linear inverse problems. \
 %% ~~objects to See Also as \code{\link{help}}, ~~~
 \code{\link{nExtParams}}, \code{\link{nExtData}}
 }
-\examples{
-##---- Should be DIRECTLY executable !! ----
-##-- ==>  Define data, use random,
-##--	or do  help(data=index)  for the standard data sets.
 
-## The function is currently defined as
-function (MAX_ITER_INNER = 5000, TOL = 1e-07, t0 = 2, step = 0.1, 
-    use_warmstart = FALSE) 
-{
-    nExtF = list(MAX_ITER_INNER = MAX_ITER_INNER, TOL = TOL, 
-        t0 = t0, step = step, use_warmstart = use_warmstart)
-    class(nExtF) = "nExtFista"
-    return(nExtF)
-  }
-}
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.
 \keyword{optimize}% use one of  RShowDoc("KEYWORDS")

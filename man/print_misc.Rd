@@ -51,12 +51,7 @@ S3 object of class \code{nExtData} or \code{nExtFista}
 %% ~~objects to See Also as \code{\link{help}}, ~~~
 \code{\link{nExtData}}
 }
-\examples{
-##---- Should be DIRECTLY executable !! ----
-##-- ==>  Define data, use random,
-##--	or do  help(data=index)  for the standard data sets.
 
-}
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.
 \keyword{methods}% use one of  RShowDoc("KEYWORDS")

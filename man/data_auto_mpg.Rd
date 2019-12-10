@@ -21,7 +21,6 @@ This dataset was taken from the UCI Machine Learning Repository \url{https://arc
     \item{\code{acceleration}}{a numeric vector}
     \item{\code{year}}{a numeric vector}
     \item{\code{origin}}{a factor}
-    \item{\code{set}}{a factor with levels \code{L} (labeled) \code{U} (unlabeled)}
   }
 }
 \details{

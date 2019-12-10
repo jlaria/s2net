@@ -63,20 +63,5 @@ Returns a named vector of S3 class \code{nExtParams}.
 %% ~~objects to See Also as \code{\link{help}}, ~~~
 \code{\link{nExtData}}, \code{\link{nExtFista}}
 }
-\examples{
-##---- Should be DIRECTLY executable !! ----
-##-- ==>  Define data, use random,
-##--	or do  help(data=index)  for the standard data sets.
-
-## The function is currently defined as
-function (lambda1, lambda2 = 0, gamma1 = 0, gamma2 = 0, gamma3 = 0) 
-{
-    nExtP = c(lambda1 = lambda1, lambda2 = lambda2, gamma1 = gamma1, 
-        gamma2 = gamma2, gamma3 = gamma3)
-    class(nExtP) = "nExtParams"
-    return(nExtP)
-  }
-}
-% Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.
 %%\keyword{  }% use one of  RShowDoc("KEYWORDS")
