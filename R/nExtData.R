@@ -72,14 +72,12 @@ nExtData <- function(xL, yL, xU = NULL, preprocess = T){
     s_center = attr(xL, "scaled:center")
     if(!is.null(xU)) xU = scale(xU, center = s_center, scale = s_scale)
     
-    # scale yL too
+    # center yL too
     if(type == "regression"){
-      yL = scale(yL)
+      yL = scale(yL, center = T, scale = F)
       y_center = attr(yL, "scaled:center")
-      y_scale = attr(yL, "scaled:scale")
     }else{
       y_center = 0
-      y_scale = 1
     }
     
   }else{
@@ -95,15 +93,14 @@ nExtData <- function(xL, yL, xU = NULL, preprocess = T){
       if(!is.null(xU)) xU = scale(xU, center = s_center, scale = s_scale)
       
       y_center = attr(preprocess, "pr:ycenter")
-      y_scale =  attr(preprocess, "pr:yscale")
+      #y_scale =  attr(preprocess, "pr:yscale")
       
-      if(type == "regression"){yL = scale(yL, center = y_center, scale = y_scale)}
+      if(type == "regression"){yL = scale(yL, center = y_center, scale = F)}
     }else{
       rm_cols = rep(FALSE, ncol(xL))
       s_scale = rep(1, ncol(xL))
       s_center = rep(0, ncol(xL))
       y_center = 0
-      y_scale = 1
     }
   }
   # nExtP = list(
@@ -125,7 +122,6 @@ nExtData <- function(xL, yL, xU = NULL, preprocess = T){
   attr(nExtD, "pr:center") = unname(s_center)
   attr(nExtD, "pr:scale") = unname(s_scale)
   attr(nExtD, "pr:ycenter") = unname(y_center)
-  attr(nExtD, "pr:yscale") = unname(y_scale)
   
   return(nExtD)
 }
