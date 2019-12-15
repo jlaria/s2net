@@ -17,3 +17,5 @@ Suggests:
     Metrics,
     testthat
 VignetteBuilder: knitr
+URL: https://github.com/jlaria/s2net
+BugReports: https://github.com/jlaria/s2net/issues
