@@ -1,8 +1,8 @@
 context("Optimization")
-library(nExtJT)
+library(s2net)
 
 lm_test = function(train){
-  obj = nExtJTR(train, nExtParams(0))
+  obj = s2netR(train, s2Params(0))
   
   lm_fit = lm.fit(x = train$xL, y = train$yL)
   true_beta = unname(lm_fit$coefficients)
@@ -14,11 +14,11 @@ lm_test = function(train){
   expect_equal(error, lm_error, tolerance = 0.00001)
 }
 
-test_that("nExtJT Fista solves the supervised problem correctly",{
+test_that("s2net Fista solves the supervised problem correctly",{
   data("auto_mpg")
-  train = nExtData(auto_mpg$P2$xL, auto_mpg$P2$yL, preprocess = TRUE)
+  train = s2Data(auto_mpg$P2$xL, auto_mpg$P2$yL, preprocess = TRUE)
   lm_test(train)
   
-  train = nExtData(auto_mpg$P1$xL[,-1], auto_mpg$P1$yL, preprocess = TRUE)
+  train = s2Data(auto_mpg$P1$xL[,-1], auto_mpg$P1$yL, preprocess = TRUE)
   lm_test(train)
 })

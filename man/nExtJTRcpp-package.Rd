@@ -1,22 +1,22 @@
-\name{nExtJT-package}
-\alias{nExtJT}
+\name{s2net-package}
+\alias{s2net}
 \docType{package}
-\title{\packageTitle{nExtJT}}
+\title{\packageTitle{s2net}}
 \description{ 
-\if{html}{\figure{nExtJT.png}{options: width=200 align='right'}}
-  \packageDescription{nExtJT}
+\if{html}{\figure{s2net.png}{options: width=200 align='right'}}
+  \packageDescription{s2net}
 }
 \details{
-  The DESCRIPTION file: \packageDESCRIPTION{nExtJT}
-  \packageIndices{nExtJT}
+  The DESCRIPTION file: \packageDESCRIPTION{s2net}
+  \packageIndices{s2net}
 
-  This package includes a very easy-to-use interface for handling data, with the \code{\link{nExtData}} function. The main function of the package is the \code{\link{nExtJTR}} function, which is a wrapper for the \code{\link{Rcpp_nExtJT}} (\code{nExtJT}) class. 
+  This package includes a very easy-to-use interface for handling data, with the \code{\link{s2Data}} function. The main function of the package is the \code{\link{s2netR}} function, which is a wrapper for the \code{\link{Rcpp_s2net}} (\code{s2net}) class. 
   }
 \author{
-  \packageAuthor{nExtJT}
+  \packageAuthor{s2net}
 }
 \references{
-Laria, J.C., L. Clemmensen (2019). A generalized linear joint trained framework for semi-supervised learning of sparse features.
+Laria, J.C., L. Clemmensen (2019). A generalized elastic-net for semi-supervised learning of sparse features.
 
 Sogaard Larsen, J. et. al. (2019).  Semi-supervised covariate shift modelling of spectroscopic data.
 
@@ -26,23 +26,23 @@ Ryan, K. J., & Culp, M. V. (2015). On semi-supervised linear regression in covar
 % from the file KEYWORDS in the R documentation.
 \keyword{package}
 \seealso{
-  \code{\link{nExtData}},
-  \code{\link{nExtJTR}},
-  \code{\link{Rcpp_nExtJT}}
+  \code{\link{s2Data}},
+  \code{\link{s2netR}},
+  \code{\link{Rcpp_s2net}}
 }
 \examples{
 data("auto_mpg")
-train = nExtData(xL = auto_mpg$P1$xL, yL = auto_mpg$P1$yL,  xU = auto_mpg$P1$xU)
+train = s2Data(xL = auto_mpg$P1$xL, yL = auto_mpg$P1$yL,  xU = auto_mpg$P1$xU)
 
-model = nExtJTR(train, 
-                nExtParams(lambda1 = 0.1, 
+model = s2netR(train, 
+                s2Params(lambda1 = 0.1, 
                            lambda2 = 0,
                            gamma1 = 0.1,
                            gamma2 = 100,
                            gamma3 = 0.1))
 
 # here we tell it to transform the valid data as we did with train.
-valid = nExtData(auto_mpg$P1$xU, auto_mpg$P1$yU, preprocess = train) 
+valid = s2Data(auto_mpg$P1$xU, auto_mpg$P1$yU, preprocess = train) 
 ypred = predict(model, valid$xL)
 
 \dontrun{

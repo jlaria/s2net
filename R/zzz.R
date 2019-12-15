@@ -1,5 +1,5 @@
-loadModule("Rcpp_nExtJT_export", TRUE)
+loadModule("Rcpp_s2net_export", TRUE)
 
-setClass("Rcpp_nExtJT")
-setMethod("predict", signature("Rcpp_nExtJT"), predict_Rcpp_nExtJT)
+setClass("Rcpp_s2net")
+setMethod("predict", signature("Rcpp_s2net"), predict_Rcpp_s2net)
 

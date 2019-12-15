@@ -1,12 +1,12 @@
-\name{Rcpp_nExtJT-class}
+\name{Rcpp_s2net-class}
 \Rdversion{1.1}
 \docType{class}
-\alias{Rcpp_nExtJT-class}
-\alias{Rcpp_nExtJT}
-\alias{_rcpp_module_boot_Rcpp_nExtJT_export}
-\alias{predict,Rcpp_nExtJT-method}
+\alias{Rcpp_s2net-class}
+\alias{Rcpp_s2net}
+\alias{_rcpp_module_boot_Rcpp_s2net_export}
+\alias{predict,Rcpp_s2net-method}
 
-\title{Class \code{nExtJT}}
+\title{Class \code{s2net}}
 \description{
 %%  ~~ A concise (1-5 lines) description of what the class is. ~~
 This is the main class of this library, implemented in C++ and exposed to \R using \code{Rcpp} modules. 
@@ -14,7 +14,7 @@ It can be used in \R directly, although some generic S4 methods have been implem
 }
 \section{Methods}{
   \describe{
-    \item{predict}{\code{signature(object = "Rcpp_nExtJT")}: See \code{\link{predict_Rcpp_nExtJT}}}
+    \item{predict}{\code{signature(object = "Rcpp_s2net")}: See \code{\link{predict_Rcpp_s2net}}}
 	 }
 }
 %%\references{
@@ -36,14 +36,14 @@ Juan C. Laria
 %%}
 \examples{
 data("auto_mpg")
-train = nExtData(xL = auto_mpg$P1$xL, yL = auto_mpg$P1$yL,  xU = auto_mpg$P1$xU)
+train = s2Data(xL = auto_mpg$P1$xL, yL = auto_mpg$P1$yL,  xU = auto_mpg$P1$xU)
 
 # We create the C++ object calling the new method (constructor)
-obj = new(nExtJT, train, 0) # 0 = regression 
+obj = new(s2net, train, 0) # 0 = regression 
 obj
 
 # We call directly the $fit method of obj, 
-obj$fit(nExtParams(lambda1 = 0.01, 
+obj$fit(s2Params(lambda1 = 0.01, 
                    lambda2 = 0.01, 
                    gamma1 = 0.05, 
                    gamma2 = 100, 
@@ -52,7 +52,7 @@ obj$fit(nExtParams(lambda1 = 0.01,
 obj$beta
 
 # We can test the results using the unlabeled data
-test = nExtData(xL = auto_mpg$P1$xU, yL = auto_mpg$P1$yU,  preprocess = train)
+test = s2Data(xL = auto_mpg$P1$xU, yL = auto_mpg$P1$yU,  preprocess = train)
 ypred = obj$predict(test$xL, 0)
 
 \dontrun{
@@ -78,11 +78,11 @@ if(require(ggplot2)){
   \describe{
     \item{\code{initialize(data, loss)}:}{
       \describe{
-      \item{\code{data} }{ \code{\link{nExtData}} object}
+      \item{\code{data} }{ \code{\link{s2Data}} object}
       \item{\code{loss} }{Loss function: 0 = linear, 1 = logit}
       }
     }
-    \item{\code{setupFista(\link{nExtFista})}:}{ Configures the FISTA internal algorithm.}
+    \item{\code{setupFista(\link{s2Fista})}:}{ Configures the FISTA internal algorithm.}
     \item{\code{predict(newX, type)}:}{
       \describe{
       \item{\code{newX} }{ New data \code{matrix} to make predictions.}
@@ -91,7 +91,7 @@ if(require(ggplot2)){
     }
     \item{\code{fit(params, frame, proj)}:}{
     \describe{
-      \item{\code{params }}{\code{\link{nExtParams}} object}
+      \item{\code{params }}{\code{\link{s2Params}} object}
       \item{\code{frame} }{0 = "JT", 1 = "ExtJT"}
       \item{\code{proj} }{0 = no, 1 = yes, 2 = auto}
     }

@@ -7,7 +7,7 @@ zero_range <- function(x, tol = .Machine$double.eps ^ 0.5) {
   isTRUE(all.equal(x[1], x[2], tolerance = tol))
 }
 
-nExtData <- function(xL, yL, xU = NULL, preprocess = T){
+s2Data <- function(xL, yL, xU = NULL, preprocess = T){
   
   # Check data
   n_l = nrow(xL)
@@ -81,7 +81,7 @@ nExtData <- function(xL, yL, xU = NULL, preprocess = T){
     }
     
   }else{
-    if(class(preprocess) == "nExtData"){
+    if(class(preprocess) == "s2Data"){
       rm_cols = attr(preprocess, "pr:rm_cols")
       xL = xL[, !rm_cols]
       if(!is.null(xU)) xU = xU[, !rm_cols]
@@ -103,31 +103,31 @@ nExtData <- function(xL, yL, xU = NULL, preprocess = T){
       y_center = 0
     }
   }
-  # nExtP = list(
+  # s2P = list(
   #   rm_cols = rm_cols,
   #   center = s_center,
   #   scale = s_scale
   # )
-  # class(nExtP) = "nExtPr"
+  # class(s2P) = "s2Pr"
   
-  nExtD = list(
+  s2D = list(
     xL = xL,
     yL = yL,
     xU = xU,
     type = type,
     base = base
   )
-  class(nExtD) = "nExtData"
-  attr(nExtD, "pr:rm_cols") = unname(rm_cols)
-  attr(nExtD, "pr:center") = unname(s_center)
-  attr(nExtD, "pr:scale") = unname(s_scale)
-  attr(nExtD, "pr:ycenter") = unname(y_center)
+  class(s2D) = "s2Data"
+  attr(s2D, "pr:rm_cols") = unname(rm_cols)
+  attr(s2D, "pr:center") = unname(s_center)
+  attr(s2D, "pr:scale") = unname(s_scale)
+  attr(s2D, "pr:ycenter") = unname(y_center)
   
-  return(nExtD)
+  return(s2D)
 }
 
-print.nExtData <- function(x, ...){
-  plog("nExtData frame:")
+print.s2Data <- function(x, ...){
+  plog("s2Data frame:")
   plog("Labeled data: ", nrow(x$xL), " ", ncol(x$xL))
   plog("Unlabeled data: ", nrow(x$xU), " ", ncol(x$xU))
   plog("Task ", x$type)

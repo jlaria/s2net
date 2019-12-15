@@ -1,16 +1,16 @@
-\name{nExtData}
-\alias{nExtData}
+\name{s2Data}
+\alias{s2Data}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{
 %%  ~~function to do ... ~~
-Data wrapper for \code{nExtJT}.
+Data wrapper for \code{s2net}.
 }
 \description{
 %%  ~~ A concise (1-5 lines) description of what the function does. ~~
 This function preprocess the data to fit a semi-supervised linear joint trained model.
 }
 \usage{
-nExtData(xL, yL, xU = NULL, preprocess = T)
+s2Data(xL, yL, xU = NULL, preprocess = T)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -34,7 +34,7 @@ Should the input data be pre-processed? Possible values are:
 
 \code{FALSE}{ Do nothing. Keep in mind that the theoretical framework assumes that \code{xL} is centered. Unless you are absolutely sure, avoid this.}
 
-Another object of class \code{nExtData} that was obtained from similar data (same original variables). This is useful when using train/validation sets, to apply the validation data the same transformation as train data. 
+Another object of class \code{s2Data} that was obtained from similar data (same original variables). This is useful when using train/validation sets, to apply the validation data the same transformation as train data. 
 }
 }
 %%\details{
@@ -46,7 +46,7 @@ Another object of class \code{nExtData} that was obtained from similar data (sam
 %%  \item{comp1 }{Description of 'comp1'}
 %%  \item{comp2 }{Description of 'comp2'}
 %% ...
-Returns an object of S3 class \code{nExtData} with fields
+Returns an object of S3 class \code{s2Data} with fields
 
 \item{xL }{Transformed labeled data}
 \item{yL }{Transformed labels. If \code{yL} was a factor, it is converted to numeric, and the base category is kept in \code{base}}
@@ -77,12 +77,12 @@ Juan C. Laria
 
 \seealso{
 %% ~~objects to See Also as \code{\link{help}}, ~~~
-\code{\link{nExtFista}}
+\code{\link{s2Fista}}
 }
 \examples{
 data("auto_mpg")
 
-train = nExtData( xL = auto_mpg$P1$xL,
+train = s2Data( xL = auto_mpg$P1$xL,
                   yL = auto_mpg$P1$yL,
                   xU = auto_mpg$P1$xU,
                   preprocess = TRUE )
@@ -96,11 +96,11 @@ head(train$xL)
 #if you want to do validation with the unlabeled data
 idx = sample(length(auto_mpg$P1$yU), 200)
 
-train = nExtData(xL = auto_mpg$P1$xL, yL = auto_mpg$P1$yL, xU = auto_mpg$P1$xU[idx, ])
+train = s2Data(xL = auto_mpg$P1$xL, yL = auto_mpg$P1$yL, xU = auto_mpg$P1$xU[idx, ])
 
-valid = nExtData(xL = auto_mpg$P1$xU[-idx, ], yL = auto_mpg$P1$yU[-idx], preprocess = train)
+valid = s2Data(xL = auto_mpg$P1$xU[-idx, ], yL = auto_mpg$P1$yU[-idx], preprocess = train)
 
-test = nExtData(xL = auto_mpg$P1$xU[idx, ], yL = auto_mpg$P1$yU[idx], preprocess = train)
+test = s2Data(xL = auto_mpg$P1$xU[idx, ], yL = auto_mpg$P1$yU[idx], preprocess = train)
 
 train
 valid

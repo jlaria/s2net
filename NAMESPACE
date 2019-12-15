@@ -1,16 +1,16 @@
-useDynLib(nExtJT, .registration=TRUE)
+useDynLib(s2net, .registration=TRUE)
 
-exportPattern(nExtJT,
-              nExtData,
-              nExtParams,
-              nExtFista,
-              nExtJTR,
+exportPattern(s2net,
+              s2Data,
+              s2Params,
+              s2Fista,
+              s2netR,
               simulate_extra,
               simulate_groups)
 
-S3method(print, nExtData)
-S3method(print, nExtFista)
-S3method(predict, nExtJTR)
+S3method(print, s2Data)
+S3method(print, s2Fista)
+S3method(predict, s2netR)
 
 import(methods, Rcpp)
 importFrom("stats", "rbinom", "rnorm", "runif", "sd")

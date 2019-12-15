@@ -1,6 +1,6 @@
-\name{print.nExtData}
-\alias{print.nExtData}
-\alias{print.nExtFista}
+\name{print.s2Data}
+\alias{print.s2Data}
+\alias{print.s2Fista}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{
 %%  ~~function to do ... ~~
@@ -11,14 +11,14 @@ Print methods for S3 objects
 Very simple print methods to show basic information about these simple S3 objects.
 }
 \usage{
-\method{print}{nExtData}(x, ...)
-\method{print}{nExtFista}(x, ...)
+\method{print}{s2Data}(x, ...)
+\method{print}{s2Fista}(x, ...)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
   \item{x}{
 %%     ~~Describe \code{x} here~~
-S3 object of class \code{nExtData} or \code{nExtFista}
+S3 object of class \code{s2Data} or \code{s2Fista}
 }
   \item{\dots}{
 %%     ~~Describe \code{\dots} here~~
@@ -49,7 +49,7 @@ S3 object of class \code{nExtData} or \code{nExtFista}
 
 \seealso{
 %% ~~objects to See Also as \code{\link{help}}, ~~~
-\code{\link{nExtData}}
+\code{\link{s2Data}}
 }
 
 % Add one or more standard keywords, see file 'KEYWORDS' in the

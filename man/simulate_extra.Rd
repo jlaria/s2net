@@ -83,10 +83,10 @@ Ryan, K. J., & Culp, M. V. (2015). On semi-supervised linear regression in covar
 set.seed(0)
 data = simulate_extra()
 
-train = nExtData(data$xL, data$yL, data$xU)
-valid = nExtData(data$xU, data$yU, preprocess = train)
+train = s2Data(data$xL, data$yL, data$xU)
+valid = s2Data(data$xU, data$yU, preprocess = train)
 
-model = nExtJTR(train, nExtParams(0.1))
+model = s2netR(train, s2Params(0.1))
 ypred = predict(model, valid$xL)
 plot(ypred, valid$yL)
 }

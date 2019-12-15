@@ -1,12 +1,12 @@
-# predict.Rcpp_nExtJT S4 method
+# predict.Rcpp_s2net S4 method
 
-predict_Rcpp_nExtJT <- function(object, newX, type = "default"){
-  if(class(newX)=="nExtData"){
+predict_Rcpp_s2net <- function(object, newX, type = "default"){
+  if(class(newX)=="s2Data"){
     # No need to pre-process
     newX = newX$xL
   }
   if(!is.matrix(newX)){
-    stop("newX shoud be a matrix or nExtData containing xL")
+    stop("newX shoud be a matrix or s2Data containing xL")
   }
   switch (type,
     response = {code = 1},

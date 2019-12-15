@@ -1,34 +1,34 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# nExtJT <img src="man/figures/nExtJT.png" align="right" width="200" />
+# s2net <img src="man/figures/s2net.png" align="right" width="200" />
 
 ## Overview
 
-R package `nExtJT`
+R package `s2net`
 
   - Our method extends the supervised elastic-net problem, and thus it
     is an ideal solution to the problem of feature selection in
     semi-supervised contexts.
   - Its mathematical formulation is presented from a general
     perspective, covering a wide range of models.
-  - We develop a flexible and fast implementation for `nExtJT` in `R`,
+  - We develop a flexible and fast implementation for `s2net` in `R`,
     written in `C++` using `RcppArmadillo` and integrated into `R` via
     `Rcpp` modules.
 
 ## Installation
 
-You can install the released version of `nExtJT` from
+You can install the released version of `s2net` from
 [CRAN](https://CRAN.R-project.org) with:
 
 ``` r
-install.packages("nExtJT")
+install.packages("s2net")
 ```
 
 The development version can be installed with:
 
 ``` r
-devtools::install_github("jlaria/nExtJT")
+devtools::install_github("jlaria/s2net")
 ```
 
 <!-- ## Example -->

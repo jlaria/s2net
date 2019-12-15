@@ -7,14 +7,14 @@
 using namespace Rcpp;
 
 
-RcppExport SEXP _rcpp_module_boot_Rcpp_nExtJT_export();
+RcppExport SEXP _rcpp_module_boot_Rcpp_s2net_export();
 
 static const R_CallMethodDef CallEntries[] = {
-    {"_rcpp_module_boot_Rcpp_nExtJT_export", (DL_FUNC) &_rcpp_module_boot_Rcpp_nExtJT_export, 0},
+    {"_rcpp_module_boot_Rcpp_s2net_export", (DL_FUNC) &_rcpp_module_boot_Rcpp_s2net_export, 0},
     {NULL, NULL, 0}
 };
 
-RcppExport void R_init_nExtJT(DllInfo *dll) {
+RcppExport void R_init_s2net(DllInfo *dll) {
     R_registerRoutines(dll, NULL, CallEntries, NULL, NULL);
     R_useDynamicSymbols(dll, FALSE);
 }

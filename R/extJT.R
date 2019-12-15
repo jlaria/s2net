@@ -1,4 +1,4 @@
-nExtJTR <- function(data, params, loss = "default", frame = "ExtJT", proj = "auto", fista = NULL, S3 = TRUE){
+s2netR <- function(data, params, loss = "default", frame = "ExtJT", proj = "auto", fista = NULL, S3 = TRUE){
   
   switch (loss,
     logit = {type_loss = 1},
@@ -22,20 +22,20 @@ nExtJTR <- function(data, params, loss = "default", frame = "ExtJT", proj = "aut
     {type_proj = 2}
   )
   
-  if(!class(data)=="nExtData")stop("[data] must be a nExtData object")
-  if(!class(params)=="nExtParams")stop("[params] must be a nExtParams object")
+  if(!class(data)=="s2Data")stop("[data] must be a s2Data object")
+  if(!class(params)=="s2Params")stop("[params] must be a s2Params object")
   
-  obj = new(nExtJT, data, type_loss)
+  obj = new(s2net, data, type_loss)
   
-  if(class(fista)=="nExtFista")obj$setupFista(fista)
+  if(class(fista)=="s2Fista")obj$setupFista(fista)
   
   obj$fit(params, type_frame, type_proj)
   
   if(S3){
     ret = list(
-      nExtData = data,
-      nExtParams = params,
-      nExtFista = fista,
+      s2Data = data,
+      s2Params = params,
+      s2Fista = fista,
       loss = loss,
       type_loss = type_loss,
       frame = frame,
@@ -45,7 +45,7 @@ nExtJTR <- function(data, params, loss = "default", frame = "ExtJT", proj = "aut
       beta = obj$beta,
       intercept = obj$intercept
     )
-    class(ret) = "nExtJTR"
+    class(ret) = "s2netR"
   }else{
     ret = obj
   }
@@ -53,17 +53,17 @@ nExtJTR <- function(data, params, loss = "default", frame = "ExtJT", proj = "aut
   return(ret)
 }
 
-# predict_response_nExtJTR = function(object, newX){
+# predict_response_s2netR = function(object, newX){
 #   return(newX %*% object$beta + object$intercept)
 # }
-# predict_probs_nExtJTR = function(object, newX){
-#   eta = predict_response_nExtJTR(object, newX)
+# predict_probs_s2netR = function(object, newX){
+#   eta = predict_response_s2netR(object, newX)
 #   return(1/(1 + exp(-eta)))
 # }
-# predict_class_nExtJTR = function(object, newX){
+# predict_class_s2netR = function(object, newX){
 #   return()
 # }
-predict.nExtJTR = function(object, newX, type = "default", ...){
+predict.s2netR = function(object, newX, type = "default", ...){
   switch (type,
     reponse = {
       type_pred = 1
@@ -77,7 +77,7 @@ predict.nExtJTR = function(object, newX, type = "default", ...){
     {type_pred = 0}
   )
   
-  obj = new(nExtJT, object$nExtData, object$type_loss)
+  obj = new(s2net, object$s2Data, object$type_loss)
   obj$beta = object$beta
   obj$intercept = object$intercept
   obj$predict(newX, type_pred)

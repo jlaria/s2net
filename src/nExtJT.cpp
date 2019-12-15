@@ -47,7 +47,7 @@ arma::vec soft_thresh(const arma::vec & z, double l){
   return S;
 }
 
-class nExtJT
+class s2net
 {
 private:
     arma::mat xL;
@@ -82,10 +82,10 @@ private:
     bool use_default;
 
 public:
-    nExtJT(const Rcpp::List & nExtData, int loss);
+    s2net(const Rcpp::List & s2Data, int loss);
     void fit_fast();
     void fit(const arma::vec & params, int frame, int proj);
-    void setupFista(const Rcpp::List & nExtFista);
+    void setupFista(const Rcpp::List & s2Fista);
     void optimizeFista();
     void optimizeFista_user();
     arma::vec predict_response(const arma::mat & newX);
@@ -105,24 +105,24 @@ public:
 };
 
 
-nExtJT::nExtJT(const Rcpp::List & nExtData, int loss)
+s2net::s2net(const Rcpp::List & s2Data, int loss)
 {
-    this->xL = Rcpp::as<arma::mat>(nExtData["xL"]);
-    this->yL = Rcpp::as<arma::mat>(nExtData["yL"]);
-    if(Rf_isNull(nExtData["xU"])){
+    this->xL = Rcpp::as<arma::mat>(s2Data["xL"]);
+    this->yL = Rcpp::as<arma::mat>(s2Data["yL"]);
+    if(Rf_isNull(s2Data["xU"])){
         this->xU = xL.rows(1,2);
     }else{
-        this->xU = Rcpp::as<arma::mat>(nExtData["xU"]);
+        this->xU = Rcpp::as<arma::mat>(s2Data["xU"]);
     }
-    this->s_scale = Rcpp::as<arma::vec>(nExtData.attr("pr:scale"));
-    this->s_center = Rcpp::as<arma::vec>(nExtData.attr("pr:center"));
-    this->rm_cols = Rcpp::as<arma::vec>(nExtData.attr("pr:rm_cols"));
-    // this->xL = nExtData["xL"];
-    // this->yL = nExtData["yL"];
-    // this->xU = nExtData["xU"];
-    // this->s_scale = nExtData.attr("pr:scale");
-    // this->s_center = nExtData.attr("pr:center");
-    // this->rm_cols = nExtData.attr("pr:rm_cols");
+    this->s_scale = Rcpp::as<arma::vec>(s2Data.attr("pr:scale"));
+    this->s_center = Rcpp::as<arma::vec>(s2Data.attr("pr:center"));
+    this->rm_cols = Rcpp::as<arma::vec>(s2Data.attr("pr:rm_cols"));
+    // this->xL = s2Data["xL"];
+    // this->yL = s2Data["yL"];
+    // this->xU = s2Data["xU"];
+    // this->s_scale = s2Data.attr("pr:scale");
+    // this->s_center = s2Data.attr("pr:center");
+    // this->rm_cols = s2Data.attr("pr:rm_cols");
 
     this->loss = loss;
 
@@ -168,22 +168,22 @@ nExtJT::nExtJT(const Rcpp::List & nExtData, int loss)
 
 }
 
-arma::vec nExtJT::Update(arma::vec beta, arma::vec gradL_beta, double t){
+arma::vec s2net::Update(arma::vec beta, arma::vec gradL_beta, double t){
     // arma::vec S1 = soft_thresh(beta - t*gradL_beta, t*lambda1);
     // return S1/(1 + 2*t*lambda2);
     return soft_thresh(beta - t*gradL_beta, t*lambda1)/(1 + 2*t*lambda2);
 }
 
-void nExtJT::setupFista(const Rcpp::List & nExtFista){
-    Arg_FISTA_MAX_ITER_INNER = nExtFista["MAX_ITER_INNER"];
-    Arg_FISTA_TOL = nExtFista["TOL"];
-    Arg_FISTA_T0 = nExtFista["t0"];
-    Arg_FISTA_STEP = nExtFista["step"];
-    use_warmstart = nExtFista["use_warmstart"];
+void s2net::setupFista(const Rcpp::List & s2Fista){
+    Arg_FISTA_MAX_ITER_INNER = s2Fista["MAX_ITER_INNER"];
+    Arg_FISTA_TOL = s2Fista["TOL"];
+    Arg_FISTA_T0 = s2Fista["t0"];
+    Arg_FISTA_STEP = s2Fista["step"];
+    use_warmstart = s2Fista["use_warmstart"];
     use_default = FALSE;
 }
 
-void nExtJT::fit(const arma::vec & params, int frame, int proj){
+void s2net::fit(const arma::vec & params, int frame, int proj){
     // Update params
     lambda1 = params[0];
     lambda2 = params[1];
@@ -236,7 +236,7 @@ void nExtJT::fit(const arma::vec & params, int frame, int proj){
     }
 }
 
-void nExtJT::optimizeFista(){
+void s2net::optimizeFista(){
     double t = FISTA_T0;
     double l_new = 1;
     double l_old = 1;
@@ -295,7 +295,7 @@ void nExtJT::optimizeFista(){
      
 }
 
-void nExtJT::optimizeFista_user(){
+void s2net::optimizeFista_user(){
     double t = Arg_FISTA_T0;
     double l_new = 1;
     double l_old = 1;
@@ -354,19 +354,19 @@ void nExtJT::optimizeFista_user(){
     }
 }
 
-arma::vec nExtJT::predict_response(const arma::mat & newX){
+arma::vec s2net::predict_response(const arma::mat & newX){
     // Asume that newX in the same space as xL, xU
     arma::vec eta = newX*beta + intercept;
     return eta;
 }
 
-arma::vec nExtJT::predict_probability(const arma::mat & newX){
+arma::vec s2net::predict_probability(const arma::mat & newX){
     arma::vec eta = predict_response(newX);
     arma::vec prob = 1/(1 + arma::exp(-eta));
     return prob;
 }
 
-arma::vec nExtJT::predict_class(const arma::mat & newX){
+arma::vec s2net::predict_class(const arma::mat & newX){
     arma::vec prob = predict_probability(newX);
     prob.for_each([](double & p_i){
         if(p_i > 0.5){ // or not?
@@ -377,7 +377,7 @@ arma::vec nExtJT::predict_class(const arma::mat & newX){
     return prob;
 }
 
-arma::vec nExtJT::predict(const arma::mat & newX, int type){
+arma::vec s2net::predict(const arma::mat & newX, int type){
     switch (type)
     {
     case TYPE_PREDICT_RESPONSE:
@@ -403,20 +403,20 @@ arma::vec nExtJT::predict(const arma::mat & newX, int type){
     }
 }
 
-// Expose class nExtJT
-RCPP_MODULE(Rcpp_nExtJT_export){
-    Rcpp::class_<nExtJT>("nExtJT")
+// Expose class s2net
+RCPP_MODULE(Rcpp_s2net_export){
+    Rcpp::class_<s2net>("s2net")
     
     .constructor<const Rcpp::List &, int>()
 
-    .method("fit", &nExtJT::fit, "Computes beta using FISTA")
+    .method("fit", &s2net::fit, "Computes beta using FISTA")
     
-    .method("setupFista", &nExtJT::setupFista, "Sets the hyperparameters for the FISTA algorithm")
+    .method("setupFista", &s2net::setupFista, "Sets the hyperparameters for the FISTA algorithm")
 
-    .method("predict", &nExtJT::predict, "Predicts response vector")
+    .method("predict", &s2net::predict, "Predicts response vector")
 
-    .property("beta", &nExtJT::get_beta, &nExtJT::set_beta)
-    .property("intercept", &nExtJT::get_intercept, &nExtJT::set_intercept)
+    .property("beta", &s2net::get_beta, &s2net::set_beta)
+    .property("intercept", &s2net::get_intercept, &s2net::set_intercept)
 
     ;
 }

@@ -1,27 +1,27 @@
-\name{predict_Rcpp_nExtJT}
-\alias{predict_Rcpp_nExtJT}
+\name{predict_Rcpp_s2net}
+\alias{predict_Rcpp_s2net}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{
 %%  ~~function to do ... ~~
-Predict method for \code{nExtJT} C++ class.
+Predict method for \code{s2net} C++ class.
 }
 \description{
 %%  ~~ A concise (1-5 lines) description of what the function does. ~~
-This function provides an interface in \R for the method \code{predict} in C++ class \code{nExtJT}.
+This function provides an interface in \R for the method \code{predict} in C++ class \code{s2net}.
 }
 \usage{
-%% \method{predict}{Rcpp_nExtJT}(object, newX, type = "default", ... )
-predict_Rcpp_nExtJT(object, newX, type = "default")
+%% \method{predict}{Rcpp_s2net}(object, newX, type = "default", ... )
+predict_Rcpp_s2net(object, newX, type = "default")
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
   \item{object}{
 %%     ~~Describe \code{object} here~~
-An object of class \code{\link{Rcpp_nExtJT}}.
+An object of class \code{\link{Rcpp_s2net}}.
 }
   \item{newX}{
 %%     ~~Describe \code{newX} here~~
-Data to make predictions. Could be a \code{\link{nExtData}} object (field \code{xL} is used) or a \code{matrix} (in the same space as the original data where the model was fitted).  
+Data to make predictions. Could be a \code{\link{s2Data}} object (field \code{xL} is used) or a \code{matrix} (in the same space as the original data where the model was fitted).  
 }
   \item{type}{
 %%     ~~Describe \code{type} here~~
@@ -55,7 +55,7 @@ Juan C. Laria
 
 \seealso{
 %% ~~objects to See Also as \code{\link{help}}, ~~~
-\code{\link{Rcpp_nExtJT}}
+\code{\link{Rcpp_s2net}}
 }
 %%\examples{
 

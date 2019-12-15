@@ -1,4 +1,4 @@
 library(testthat)
-library(nExtJT)
+library(s2net)
 
-test_check("nExtJT")
+test_check("s2net")

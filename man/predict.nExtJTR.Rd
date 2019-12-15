@@ -1,26 +1,26 @@
-\name{predict.nExtJTR}
-\alias{predict.nExtJTR}
+\name{predict.s2netR}
+\alias{predict.s2netR}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{
 %%  ~~function to do ... ~~
-S3 Methods for \code{\link{nExtJTR}} objects.
+S3 Methods for \code{\link{s2netR}} objects.
 }
 \description{
 %%  ~~ A concise (1-5 lines) description of what the function does. ~~
-Generic predict method. Wrapper for the C++ class method \code{nExtJT$predict}.
+Generic predict method. Wrapper for the C++ class method \code{s2net$predict}.
 }
 \usage{
-\method{predict}{nExtJTR}(object, newX, type = "default", ...)
+\method{predict}{s2netR}(object, newX, type = "default", ...)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
   \item{object}{
 %%     ~~Describe \code{object} here~~
-A \code{\link{nExtJTR}} object
+A \code{\link{s2netR}} object
 }
   \item{newX}{
 %%     ~~Describe \code{newX} here~~
-A matrix with the data to make predictions. It should be in the same scale as the original data. See \code{\link{nExtData}} to see how to format the data. 
+A matrix with the data to make predictions. It should be in the same scale as the original data. See \code{\link{s2Data}} to see how to format the data. 
 }
   \item{type}{
 %%     ~~Describe \code{type} here~~
@@ -55,14 +55,14 @@ A column matrix with predictions.
 
 \seealso{
 %% ~~objects to See Also as \code{\link{help}}, ~~~
-\code{\link{nExtJTR}}, \code{\link{nExtJT}}
+\code{\link{s2netR}}, \code{\link{s2net}}
 }
 \examples{
 data("auto_mpg")
-train = nExtData(xL = auto_mpg$P1$xL, yL = auto_mpg$P1$yL,  xU = auto_mpg$P1$xU)
+train = s2Data(xL = auto_mpg$P1$xL, yL = auto_mpg$P1$yL,  xU = auto_mpg$P1$xU)
 
-model = nExtJTR(train, 
-                nExtParams(lambda1 = 0.1, 
+model = s2netR(train, 
+                s2Params(lambda1 = 0.1, 
                            lambda2 = 0,
                            gamma1 = 0.1,
                            gamma2 = 100,
@@ -70,9 +70,9 @@ model = nExtJTR(train,
                 loss = "linear",
                 frame = "ExtJT",
                 proj = "auto",
-                fista = nExtFista(5000, 1e-7, 1, 0.8))
+                fista = s2Fista(5000, 1e-7, 1, 0.8))
 
-valid = nExtData(auto_mpg$P1$xU, auto_mpg$P1$yU, preprocess = train)
+valid = s2Data(auto_mpg$P1$xU, auto_mpg$P1$yU, preprocess = train)
 ypred = predict(model, valid$xL)
 \dontrun{
 if(require(ggplot2)){

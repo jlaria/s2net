@@ -1,5 +1,5 @@
-\name{nExtJTR}
-\alias{nExtJTR}
+\name{s2netR}
+\alias{s2netR}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{
 %%  ~~function to do ... ~~
@@ -7,21 +7,21 @@ Trains a generalized extended linear joint trained model using semi-supervised d
 }
 \description{
 %%  ~~ A concise (1-5 lines) description of what the function does. ~~
-This function is a wrapper for the class \code{\link{nExtJT}}. It creates the C++ object and fits the model using input \code{data}.
+This function is a wrapper for the class \code{\link{s2net}}. It creates the C++ object and fits the model using input \code{data}.
 }
 \usage{
-nExtJTR(data, params, loss = "default", frame = "ExtJT", proj = "auto", 
+s2netR(data, params, loss = "default", frame = "ExtJT", proj = "auto", 
         fista = NULL, S3 = TRUE)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
   \item{data}{
 %%     ~~Describe \code{data} here~~
-A \code{\link{nExtData}} object with the (training) data.
+A \code{\link{s2Data}} object with the (training) data.
 }
   \item{params}{
 %%     ~~Describe \code{params} here~~
-A \code{\link{nExtParams}} object with the model hyper-parameters.
+A \code{\link{s2Params}} object with the model hyper-parameters.
 }
   \item{loss}{
 %%     ~~Describe \code{loss} here~~
@@ -37,7 +37,7 @@ Should the unlabeled data be shifted to remove the model's effect? One of \code{
 }
   \item{fista}{
 %%     ~~Describe \code{fista} here~~
-Fista setup parameters. An object of class \code{\link{nExtFista}}.
+Fista setup parameters. An object of class \code{\link{s2Fista}}.
 }
   \item{S3}{
 %%     ~~Describe \code{fista} here~~
@@ -53,7 +53,7 @@ Boolean: should the method return an S3 object (default) or a C++ object?
 %%  \item{comp1 }{Description of 'comp1'}
 %%  \item{comp2 }{Description of 'comp2'}
 %% ...
-Returns an object of S3 class \code{nExtJTR} or a C++ object of class \code{\link{nExtJT}}
+Returns an object of S3 class \code{s2netR} or a C++ object of class \code{\link{s2net}}
 }
 \references{
 %% ~put references to the literature/web site here ~
@@ -71,14 +71,14 @@ Juan C. Laria
 
 \seealso{
 %% ~~objects to See Also as \code{\link{help}}, ~~~
-\code{\link{nExtJT}}
+\code{\link{s2net}}
 }
 \examples{
 data("auto_mpg")
-train = nExtData(xL = auto_mpg$P1$xL, yL = auto_mpg$P1$yL,  xU = auto_mpg$P1$xU)
+train = s2Data(xL = auto_mpg$P1$xL, yL = auto_mpg$P1$yL,  xU = auto_mpg$P1$xU)
 
-model = nExtJTR(train, 
-                nExtParams(lambda1 = 0.1, 
+model = s2netR(train, 
+                s2Params(lambda1 = 0.1, 
                            lambda2 = 0,
                            gamma1 = 0.1,
                            gamma2 = 100,
@@ -86,9 +86,9 @@ model = nExtJTR(train,
                 loss = "linear",
                 frame = "ExtJT",
                 proj = "auto",
-                fista = nExtFista(5000, 1e-7, 1, 0.8))
+                fista = s2Fista(5000, 1e-7, 1, 0.8))
 
-valid = nExtData(auto_mpg$P1$xU, auto_mpg$P1$yU, preprocess = train)
+valid = s2Data(auto_mpg$P1$xU, auto_mpg$P1$yU, preprocess = train)
 ypred = predict(model, valid$xL)
 
 \dontrun{

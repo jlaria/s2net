@@ -1,5 +1,5 @@
-\name{nExtFista}
-\alias{nExtFista}
+\name{s2Fista}
+\alias{s2Fista}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{
 %%  ~~function to do ... ~~
@@ -7,10 +7,10 @@ Hyper-parameter wrapper for FISTA.
 }
 \description{
 %%  ~~ A concise (1-5 lines) description of what the function does. ~~
-This is a very simple function that supplies the hyper-parameters for the Fast Iterative Soft-Threshold Algorithm (FISTA) that solves the \code{nExtJT} minimization problem.
+This is a very simple function that supplies the hyper-parameters for the Fast Iterative Soft-Threshold Algorithm (FISTA) that solves the \code{s2net} minimization problem.
 }
 \usage{
-nExtFista(MAX_ITER_INNER = 5000, TOL = 1e-07, t0 = 2, step = 0.1, use_warmstart = FALSE)
+s2Fista(MAX_ITER_INNER = 5000, TOL = 1e-07, t0 = 2, step = 0.1, use_warmstart = FALSE)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -44,7 +44,7 @@ Should we use a warm \code{beta} to fit the model? This is useful to speed-up hy
 %%  \item{comp1 }{Description of 'comp1'}
 %%  \item{comp2 }{Description of 'comp2'}
 %% ...
-Returns an object of S3 class \code{nExtFista} with the input arguments as fields.
+Returns an object of S3 class \code{s2Fista} with the input arguments as fields.
 }
 \references{
 %% ~put references to the literature/web site here ~
@@ -62,7 +62,7 @@ A fast iterative shrinkage-thresholding algorithm for linear inverse problems. \
 
 \seealso{
 %% ~~objects to See Also as \code{\link{help}}, ~~~
-\code{\link{nExtParams}}, \code{\link{nExtData}}
+\code{\link{s2Params}}, \code{\link{s2Data}}
 }
 
 % Add one or more standard keywords, see file 'KEYWORDS' in the
