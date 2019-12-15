@@ -1,8 +1,8 @@
 ---
-title: "The supervised `nExtJT`"
+title: "The supervised `s2net`"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{The supervised `nExtJT`}
+  %\VignetteIndexEntry{The supervised `s2net`}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -17,18 +17,18 @@ knitr::opts_chunk$set(
 )
 ```
 
-`nExtJT` can be used as a supervised method (without unlabeled data) and it is equialent to elastic net. 
+`s2net` can be used as a supervised method (without unlabeled data) and it is equialent to elastic net. 
 
 ## Data
 
-The `auto_mpg` dataset is available when `nExtJT` is installed. 
+The `auto_mpg` dataset is available when `s2net` is installed. 
 
 ```{r}
-library(nExtJT)
+library(s2net)
 data("auto_mpg")
 
-# Preprocess the data using the nExtData function
-train = nExtData(auto_mpg$P1$xL, auto_mpg$P1$yL, preprocess = TRUE)
+# Preprocess the data using the s2Data function
+train = s2Data(auto_mpg$P1$xL, auto_mpg$P1$yL, preprocess = TRUE)
 ```
 
 ## Ordinary least squares
@@ -39,10 +39,10 @@ To fit an OLS model, we will use the `lm` function (without intercept).
 lm.fit = lm( y~ 0 + ., data = data.frame(train$xL, y = train$yL))
 ```
 
-To obtain the estimations from `nExtJT` we use
+To obtain the estimations from `s2net` we use
 
 ```{r}
-obj = nExtJTR(train, nExtParams(0))
+obj = s2netR(train, s2Params(0))
 # We set all the hyper-parameters to 0
 ```
 
@@ -56,11 +56,11 @@ print("OLS error:")
 mse(ypred, train$yL)
 
 ypred = predict(obj, train$xL)
-print("nExtJT error:")
+print("s2net error:")
 mse(ypred, train$yL)
 
 #Estimations
-data.frame(mle = lm.fit$coefficients, nExtJT = obj$beta)
+data.frame(mle = lm.fit$coefficients, s2net = obj$beta)
 ```
 
 ## Lasso
@@ -74,13 +74,13 @@ ypred = predict(lasso.fit, train$xL)
 print("Lasso error:")
 mse(ypred, train$yL)
 
-obj = nExtJTR(train, nExtParams(lambda1 = 0.01))
+obj = s2netR(train, s2Params(lambda1 = 0.01))
 ypred = predict(obj, train$xL)
-print("nExtJT error")
+print("s2net error")
 mse(ypred, train$yL)
 
 print("Coefficients")
-data.frame(lasso = as.numeric(lasso.fit$beta), nExtJT = obj$beta)
+data.frame(lasso = as.numeric(lasso.fit$beta), s2net = obj$beta)
 ```
 
 ## Elastic net
@@ -92,11 +92,11 @@ ypred = predict(enet.fit, train$xL)
 print("glmnet error")
 mse(ypred, train$yL)
 
-obj = nExtJTR(train, nExtParams(lambda1 = 0.01, lambda2 = 0.01))
+obj = s2netR(train, s2Params(lambda1 = 0.01, lambda2 = 0.01))
 ypred = predict(obj, train$xL)
-print("nExtJT error")
+print("s2net error")
 mse(ypred, train$yL)
 
 print("Coefficients")
-data.frame(enet = as.matrix(enet.fit$beta), nExtJT = obj$beta)
+data.frame(enet = as.matrix(enet.fit$beta), s2net = obj$beta)
 ```

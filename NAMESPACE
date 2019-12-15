@@ -6,7 +6,8 @@ exportPattern(s2net,
               s2Fista,
               s2netR,
               simulate_extra,
-              simulate_groups)
+              simulate_groups,
+              transform_ExtJT)
 
 S3method(print, s2Data)
 S3method(print, s2Fista)

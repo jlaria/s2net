@@ -6,7 +6,6 @@
 #define TYPE_TRANSFORM_ExtJT 1
 
 
-
 arma::mat transform_ExtJT(const arma::mat & X, double gamma2, double gamma3){
     int n = X.n_rows;
     int p = X.n_cols;

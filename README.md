@@ -8,7 +8,7 @@
 R package `s2net`
 
   - Our method extends the supervised elastic-net problem, and thus it
-    is an ideal solution to the problem of feature selection in
+    is a practical solution to the problem of feature selection in
     semi-supervised contexts.
   - Its mathematical formulation is presented from a general
     perspective, covering a wide range of models.

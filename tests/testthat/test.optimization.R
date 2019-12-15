@@ -7,7 +7,7 @@ lm_test = function(train){
   lm_fit = lm.fit(x = train$xL, y = train$yL)
   true_beta = unname(lm_fit$coefficients)
   found_beta = as.vector(obj$beta)
-  expect_equal(found_beta, true_beta, tolerance = .001)
+  expect_equal(found_beta, true_beta, tolerance = .01)
   
   lm_error = mean((train$xL%*%lm_fit$coefficients - train$yL)^2)
   error = mean((obj$intercept + train$xL%*%obj$beta - train$yL)^2)
