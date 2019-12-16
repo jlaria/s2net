@@ -37,6 +37,61 @@ The development version can be installed with:
 ``` r
 devtools::install_github("jlaria/s2net")
 ```
+## Example 
+
+This is a basic example which shows you how to use the package. Detailed examples can be found in the documentation and vignettes. 
+
+```{r}
+library(s2net)
+# Auto-MPG dataset is included for benchmark
+data("auto_mpg")
+```
+
+Semi-supervised data is made of a labeled dataset `xL`, the labels `yL`, and unlabeled data `xU`.  Package `s2net` includes the function `s2Data` to process semi-supervised datasets. 
+
+```{r}
+head(auto_mpg$P2$xL, 2) # labeled data
+head(auto_mpg$P2$yL, 2) # labels
+head(auto_mpg$P2$xU, 2) # unlabeled data
+
+train = s2Data(auto_mpg$P2$xL, auto_mpg$P2$yL, auto_mpg$P2$xU, preprocess = TRUE)
+
+head(train$xL, 2)
+```
+
+The data is centered and scaled, and factor variables are automatically converted to numerical dummies. Constant columns are also removed. If we wanted to use validation/test data, we must pre-process it according to the training data, with:
+
+```{r}
+valid = s2Data(auto_mpg$P2$xU, auto_mpg$P2$yU, preprocess = train)
+```
+
+There are two ways to fit a semi-supervised elastic-net using `s2net`. The easiest way is using the function `s2netR`, that returns an object of S3 class `s2netR`.
+
+```{r}
+model = s2netR(train, params = s2Params(lambda1 = 0.01, lambda2 = 0.01, gamma1 = 0.01, gamma2 = 100, gamma3 = 0.1))
+
+class(model)
+model$beta
+
+ypred = predict(model, valid$xL)
+```
+
+If we are fitting the semi-supervised alstic-net many times, using the same `train` data (for example, searching for the best hyperparameters), then it is faster to use the `C++` class `s2net` instead.
+
+```{r}
+obj = new(s2net, train, 0) # 0 = linear
+
+# We fit the model with
+obj$fit(s2Params(0.01, 0.01, 0.01, 100, 0.1), 0, 2) # frame = 0 (ExtJT), proj = 2 (auto)
+
+obj$beta
+
+ypred = obj$predict(valid$xL, 0) #0=default predictions
+# or
+ypred = predict(obj, valid$xL)
+```
+
+
 
 <!-- ## Example -->
 
