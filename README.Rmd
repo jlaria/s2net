@@ -14,7 +14,10 @@ knitr::opts_chunk$set(
 ```
 
 # s2net  <img src="man/figures/s2net.png" align="right" width="200" />
- 
+
+version `r packageVersion("s2net")`
+
+
 ## Overview
 
 R package `s2net`
@@ -76,7 +79,7 @@ model$beta
 ypred = predict(model, valid$xL)
 ```
 
-If we are fitting the semi-supervised alstic-net many times, using the same `train` data (for example, searching for the best hyperparameters), then it is faster to use the `C++` class `s2net` instead.
+If we are fitting the semi-supervised elastic-net many times, using the same `train` data (for example, searching for the best hyperparameters), then it is faster to use the `C++` class `s2net` instead.
 
 ```{r}
 obj = new(s2net, train, 0) # 0 = linear
@@ -91,6 +94,13 @@ ypred = obj$predict(valid$xL, 0) #0=default predictions
 ypred = predict(obj, valid$xL)
 ```
 
+### Further examples
+
+More examples can be found in the package documentation and vignettes.
+
+```{r, eval=FALSE}
+vignette(package="s2net")
+```
 
 
 <!-- ## Example -->

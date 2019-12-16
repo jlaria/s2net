@@ -3,6 +3,8 @@
 
 # s2net <img src="man/figures/s2net.png" align="right" width="200" />
 
+version 1.0
+
 ## Overview
 
 R package `s2net`
@@ -100,7 +102,7 @@ model$beta
 ypred = predict(model, valid$xL)
 ```
 
-If we are fitting the semi-supervised alstic-net many times, using the
+If we are fitting the semi-supervised elastic-net many times, using the
 same `train` data (for example, searching for the best hyperparameters),
 then it is faster to use the `C++` class `s2net` instead.
 
@@ -123,6 +125,14 @@ obj$beta
 ypred = obj$predict(valid$xL, 0) #0=default predictions
 # or
 ypred = predict(obj, valid$xL)
+```
+
+### Further examples
+
+More examples can be found in the package documentation and vignettes.
+
+``` r
+vignette(package="s2net")
 ```
 
 <!-- ## Example -->
