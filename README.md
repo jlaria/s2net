@@ -1,11 +1,11 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# s2net <img src="man/figures/s2net.png" align="right" width="200" />
+## s2net <img src="man/figures/s2net.png" align="right" width="150" />
 
 version 1.0
 
-## Overview
+### Overview
 
 R package `s2net`
 
@@ -18,7 +18,7 @@ R package `s2net`
     written in `C++` using `RcppArmadillo` and integrated into `R` via
     `Rcpp` modules.
 
-## Installation
+### Installation
 
 You can install the released version of `s2net` from
 [CRAN](https://CRAN.R-project.org) with:
@@ -33,7 +33,7 @@ The development version can be installed with:
 devtools::install_github("jlaria/s2net")
 ```
 
-## Example
+### Example
 
 This is a basic example which shows you how to use the package. Detailed
 examples can be found in the documentation and vignettes.
@@ -127,7 +127,7 @@ ypred = obj$predict(valid$xL, 0) #0=default predictions
 ypred = predict(obj, valid$xL)
 ```
 
-### Further examples
+#### Further examples
 
 More examples can be found in the package documentation and vignettes.
 
