@@ -33,7 +33,7 @@ install.packages("s2net")
 The development version can be installed with:
 
 ``` r
-devtools::install_github("jlaria/s2net")
+devtools::install_github("jlaria/s2net", build_vignettes = TRUE)
 ```
 
 ### Example
