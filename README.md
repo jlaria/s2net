@@ -3,6 +3,9 @@
 
 ## s2net <img src="man/figures/s2net.png" align="right" width="150" />
 
+[![Travis build
+status](https://travis-ci.org/jlaria/s2net.svg?branch=master)](https://travis-ci.org/jlaria/s2net)
+
 version 1.0
 
 ### Overview
