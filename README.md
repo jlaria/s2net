@@ -5,6 +5,8 @@
 
 [![Travis build
 status](https://travis-ci.org/jlaria/s2net.svg?branch=master)](https://travis-ci.org/jlaria/s2net)
+[![](https://img.shields.io/github/languages/code-size/jlaria/s2net.svg)](https://github.com/jlaria/s2net)
+[![](https://img.shields.io/github/last-commit/jlaria/s2net.svg)](https://github.com/jlaria/s2net/commits/master)
 
 version 1.0
 
