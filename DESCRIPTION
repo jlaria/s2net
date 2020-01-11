@@ -1,6 +1,6 @@
 Package: s2net
 Type: Package
-Title: The Generalized Semi-Supervised Elastic-Net for R
+Title: The Generalized Semi-Supervised Elastic-Net
 Version: 1.0
 Date: 2020-01-08
 Authors@R: c(person("Juan C.",
