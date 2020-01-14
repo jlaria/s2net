@@ -17,7 +17,7 @@ knitr::opts_chunk$set(
 )
 ```
 
-`s2net` can be used as a supervised method (without unlabeled data) and it is equialent to elastic net. 
+`s2net` can be used as a supervised method (without unlabeled data) and it is equivalent to elastic net. 
 
 ## Data
 
