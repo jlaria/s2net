@@ -82,7 +82,7 @@ private:
     bool use_default;
 
 public:
-    s2net(const Rcpp::List & s2Data, int loss);
+    s2net(const Rcpp::List s2Data, int loss);
     void fit_fast();
     void fit(const arma::vec & params, int frame, int proj);
     void setupFista(const Rcpp::List & s2Fista);
@@ -105,7 +105,7 @@ public:
 };
 
 
-s2net::s2net(const Rcpp::List & s2Data, int loss)
+s2net::s2net(const Rcpp::List s2Data, int loss)
 {
     this->xL = Rcpp::as<arma::mat>(s2Data["xL"]);
     this->yL = Rcpp::as<arma::mat>(s2Data["yL"]);
@@ -407,7 +407,7 @@ arma::vec s2net::predict(const arma::mat & newX, int type){
 RCPP_MODULE(Rcpp_s2net_export){
     Rcpp::class_<s2net>("s2net")
     
-    .constructor<const Rcpp::List &, int>()
+    .constructor<const Rcpp::List , int>()
 
     .method("fit", &s2net::fit, "Computes beta using FISTA")
     
