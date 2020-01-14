@@ -1,5 +1,6 @@
 ## Test environments
 * local Debian GNU/Linux bullseye install, R 3.6.1
+* rhub (`"fedora-clang-devel"`)
 
 ## R CMD check results
 
@@ -19,14 +20,24 @@ This note only appears when compiling with g++ in Linux. I believe it is related
 (BEFORE)
 ERROR
 
-In file included from nExtJT.cpp:4:
-In file included from /data/gannet/ripley/R/test-clang/RcppArmadillo/include/RcppArmadillo.h:31:
-In file included from /data/gannet/ripley/R/test-clang/RcppArmadillo/include/RcppArmadilloForward.h:26:
-In file included from /data/gannet/ripley/R/test-clang/Rcpp/include/RcppCommon.h:168:
-In file included from /data/gannet/ripley/R/test-clang/Rcpp/include/Rcpp/as.h:25:
-/data/gannet/ripley/R/test-clang/Rcpp/include/Rcpp/internal/Exporter.h:31:30: error: reference member 't' binds to a temporary object whose lifetime would be shorter than the lifetime of the constructed object
+
+    In file included from nExtJT.cpp:4:
+    In file included from /data/gannet/ripley/R/test-clang/RcppArmadillo/include/RcppArmadillo.h:31:
+    In file included from /data/gannet/ripley/R/test-clang/RcppArmadillo/include/RcppArmadilloForward.h:26:
+    In file included from /data/gannet/ripley/R/test-clang/Rcpp/include/RcppCommon.h:168:
+    In file included from /data/gannet/ripley/R/test-clang/Rcpp/include/Rcpp/as.h:25:
+    /data/gannet/ripley/R/test-clang/Rcpp/include/Rcpp/internal/Exporter.h:31:30: error: reference member 't' binds to a temporary object whose lifetime would be shorter than the lifetime of the constructed object
                     Exporter( SEXP x ) : t(x){}
                     
 
 This is fixed in the new version. Solution found [here](https://stackoverflow.com/questions/56004251/rcpp-module-error-with-a-constructor-taking-numericvector-as-parameter)
 
+Result on rhub **Fedora Linux, R-devel, clang, gfortran**
+
+* checking CRAN incoming feasibility ... NOTE
+Maintainer: ‘Juan C. Laria <juank.laria@gmail.com>’
+
+Days since last update: 1
+
+Possibly mis-spelled words in DESCRIPTION:
+  Culp (15:600)
