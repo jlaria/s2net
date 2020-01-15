@@ -33,7 +33,7 @@
 // Soft-threshold operator
 arma::vec soft_thresh(const arma::vec & z, double l){
   arma::vec S = arma::vec(z.n_elem);
-  for(int i=0; i<z.n_elem; i++){
+  for(uint i=0; i<z.n_elem; i++){
     if(std::abs(z[i]) <= l){
       S(i) = 0;
     }else{
@@ -240,7 +240,7 @@ void s2net::optimizeFista(){
     double t = FISTA_T0;
     double l_new = 1;
     double l_old = 1;
-    int iter = 0;
+    //int iter = 0;
     
     arma::vec theta_new = beta;
     arma::vec theta_old;
@@ -299,7 +299,7 @@ void s2net::optimizeFista_user(){
     double t = Arg_FISTA_T0;
     double l_new = 1;
     double l_old = 1;
-    int iter = 0;
+    //int iter = 0;
     
     arma::vec theta_new = beta;
     arma::vec theta_old;

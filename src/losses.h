@@ -55,7 +55,7 @@ double R_logit(const arma::vec & beta,
 
     // There is a more efficient and stable computation
     double rlogit = 0;
-    for (int i = 0; i < eta.n_elem; i++)
+    for (uint i = 0; i < eta.n_elem; i++)
     {
         rlogit += eta[i] = log1pexp(eta[i]) - y[i] * eta[i];
     }
@@ -67,7 +67,7 @@ double R_logit2(const arma::vec & beta,
     arma::vec eta = X*beta;
     // There is a more efficient and stable computation
     double rlogit = 0;
-    for (int i = 0; i < eta.n_elem; i++)
+    for (uint i = 0; i < eta.n_elem; i++)
     {
         rlogit += eta[i] = log1pexp(eta[i]) - y * eta[i];
     }
@@ -90,7 +90,7 @@ arma::vec grad_R_logit(const arma::vec & beta,
 
     // More stable
     arma::vec tmp = X*beta;
-    for (int i = 0; i < tmp.n_elem; i++)
+    for (uint i = 0; i < tmp.n_elem; i++)
     {
         tmp[i] = inv1pexpm(tmp[i]) - y[i];
     }
@@ -101,7 +101,7 @@ arma::vec grad_R_logit2(const arma::vec & beta,
                        double y){
     // More stable
     arma::vec tmp = X*beta;
-    for (int i = 0; i < tmp.n_elem; i++)
+    for (uint i = 0; i < tmp.n_elem; i++)
     {
         tmp[i] = inv1pexpm(tmp[i]) - y;
     }
