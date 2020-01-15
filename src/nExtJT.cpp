@@ -33,7 +33,7 @@
 // Soft-threshold operator
 arma::vec soft_thresh(const arma::vec & z, double l){
   arma::vec S = arma::vec(z.n_elem);
-  for(uint i=0; i<z.n_elem; i++){
+  for(unsigned int i=0; i<z.n_elem; i++){
     if(std::abs(z[i]) <= l){
       S(i) = 0;
     }else{
