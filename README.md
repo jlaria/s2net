@@ -40,9 +40,7 @@ devtools::install_github("jlaria/s2net", build_vignettes = TRUE)
 
 ### Features
 
-<iframe src="https://slides.com/juancarloslaria/deck/embed" width="576" height="420" scrolling="no" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen>
-
-</iframe>
+[![](man/figures/s2net-deck.jpg)](https://slides.com/juancarloslaria/deck#/)
 
 ### Example
 
