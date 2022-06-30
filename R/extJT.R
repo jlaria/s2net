@@ -27,7 +27,7 @@ s2netR <- function(data, params, loss = "default", frame = "ExtJT", proj = "auto
   
   obj = new(s2net, data, type_loss)
   
-  if(class(fista)=="s2Fista")obj$setupFista(fista)
+  if(is(fista,"s2Fista"))obj$setupFista(fista)
   
   obj$fit(params, type_frame, type_proj)
   
