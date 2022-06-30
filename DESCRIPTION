@@ -27,3 +27,4 @@ VignetteBuilder: knitr
 URL: https://github.com/jlaria/s2net
 BugReports: https://github.com/jlaria/s2net/issues
 Encoding: UTF-8
+RoxygenNote: 7.2.0
