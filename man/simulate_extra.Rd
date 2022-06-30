@@ -9,7 +9,7 @@ Simulate extrapolated data
 %%  ~~ A concise (1-5 lines) description of what the function does. ~~
 Simulated data scenarios described in the paper from Ryan and Culp (2015). 
 
-\if{html}{\figure{sim_extra.jpg}{options: width=300 float='center'}}
+\if{html}{\figure{sim_extra.jpg}{options: width=300}}
 }
 \usage{
 simulate_extra(n_source = 100, n_target = 100, p = 1000, shift = 10, 

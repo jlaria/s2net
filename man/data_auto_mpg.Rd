@@ -31,7 +31,7 @@ This dataset is a slightly modified version of the dataset provided in the StatL
 %%  ~~ reference to a publication or URL from which the data were obtained ~~
 Quinlan,R. (1993). Combining Instance-Based and Model-Based Learning. In Proceedings on the Tenth International Conference of Machine Learning, 236-243, University of Massachusetts, Amherst. Morgan Kaufmann.
 
-Dua, D. and Graff, C. (2019). UCI Machine Learning Repository [\url{http://archive.ics.uci.edu/ml}]. Irvine, CA: University of California, School of Information and Computer Science.
+Dua, D. and Graff, C. (2019). UCI Machine Learning Repository [\url{http://archive.ics.uci.edu/ml/}]. Irvine, CA: University of California, School of Information and Computer Science.
 }
 \references{
 %%  ~~ possibly secondary sources and usages ~~

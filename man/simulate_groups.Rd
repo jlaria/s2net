@@ -9,7 +9,7 @@ Simulate data (two groups design)
 %%  ~~ A concise (1-5 lines) description of what the function does. ~~
 Simulated data scenario described in paper [citation here].
 
-\if{html}{\figure{sim_fr.jpg}{options: width=600 float='center'}}
+\if{html}{\figure{sim_fr.jpg}{options: width=600}}
 }
 \usage{
 simulate_groups(n_source = 100, n_target = 100, p = 200, response = "linear")

@@ -3,7 +3,7 @@
 \docType{package}
 \title{\packageTitle{s2net}}
 \description{ 
-\if{html}{\figure{s2net.png}{options: width=200 float='right'}}
+\if{html}{\figure{s2net.png}{options: width=200}}
   \packageDescription{s2net}
 }
 \details{
