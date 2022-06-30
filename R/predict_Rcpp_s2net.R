@@ -1,7 +1,7 @@
 # predict.Rcpp_s2net S4 method
 
 predict_Rcpp_s2net <- function(object, newX, type = "default"){
-  if(class(newX)=="s2Data"){
+  if(is(newX,"s2Data")){
     # No need to pre-process
     newX = newX$xL
   }

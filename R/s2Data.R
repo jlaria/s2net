@@ -81,7 +81,7 @@ s2Data <- function(xL, yL, xU = NULL, preprocess = T){
     }
     
   }else{
-    if(class(preprocess) == "s2Data"){
+    if(is(preprocess,"s2Data")){
       rm_cols = attr(preprocess, "pr:rm_cols")
       xL = xL[, !rm_cols]
       if(!is.null(xU)) xU = xU[, !rm_cols]
