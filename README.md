@@ -1,25 +1,24 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-## s2net <img src="man/figures/s2net.png" align="right" width="150" />
+## s2net <img src="man/figures/s2net.png" float="right" width="150" />
 
-[![Travis build
-status](https://travis-ci.org/jlaria/s2net.svg?branch=master)](https://travis-ci.org/jlaria/s2net)
+[![R-CMD-check](https://github.com/jlaria/s2net/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/jlaria/s2net/actions/workflows/R-CMD-check.yaml)
 [![](https://img.shields.io/github/languages/code-size/jlaria/s2net.svg)](https://github.com/jlaria/s2net)
 [![](https://img.shields.io/github/last-commit/jlaria/s2net.svg)](https://github.com/jlaria/s2net/commits/master)
 [![](https://www.r-pkg.org/badges/version/s2net?color=orange)](https://cran.r-project.org/package=s2net)
-[![](https://img.shields.io/badge/devel%20version-1.0.1-blue.svg)](https://github.com/jlaria/s2net)
+[![](https://img.shields.io/badge/devel%20version-1.0.2-blue.svg)](https://github.com/jlaria/s2net)
 
 ### Overview
 
 R package `s2net`
 
-  - Our method extends the supervised elastic-net problem, and thus it
+-   Our method extends the supervised elastic-net problem, and thus it
     is a practical solution to the problem of feature selection in
     semi-supervised contexts.
-  - Its mathematical formulation is presented from a general
+-   Its mathematical formulation is presented from a general
     perspective, covering a wide range of models.
-  - We develop a flexible and fast implementation for `s2net` in `R`,
+-   We develop a flexible and fast implementation for `s2net` in `R`,
     written in `C++` using `RcppArmadillo` and integrated into `R` via
     `Rcpp` modules.
 
@@ -134,6 +133,8 @@ obj$beta
 ypred = obj$predict(valid$xL, 0) #0=default predictions
 # or
 ypred = predict(obj, valid$xL)
+#> Warning in if (class(newX) == "s2Data") {: the condition has length > 1 and only
+#> the first element will be used
 ```
 
 #### Further examples
@@ -145,31 +146,17 @@ vignette(package="s2net")
 ```
 
 <!-- ## Example -->
-
 <!-- This is a basic example which shows you how to solve a common problem: -->
-
 <!-- ```{r example} -->
-
 <!-- ## basic example code -->
-
 <!-- ``` -->
-
 <!-- What is special about using `README.Rmd` instead of just `README.md`? You can include R chunks like so: -->
-
 <!-- ```{r cars} -->
-
 <!-- summary(cars) -->
-
 <!-- ``` -->
-
 <!-- You'll still need to render `README.Rmd` regularly, to keep `README.md` up-to-date. -->
-
 <!-- You can also embed plots, for example: -->
-
 <!-- ```{r pressure, echo = FALSE} -->
-
 <!-- plot(pressure) -->
-
 <!-- ``` -->
-
 <!-- In that case, don't forget to commit and push the resulting figure files, so they display on GitHub! -->

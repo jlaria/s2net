@@ -16,7 +16,7 @@ knitr::opts_chunk$set(
 
 
 ## s2net  <img src="man/figures/s2net.png" float="right" width="150" />
-[![Travis build status](https://travis-ci.org/jlaria/s2net.svg?branch=master)](https://travis-ci.org/jlaria/s2net)
+  [![R-CMD-check](https://github.com/jlaria/s2net/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/jlaria/s2net/actions/workflows/R-CMD-check.yaml)
 `r badger::badge_code_size("jlaria/s2net")`
 `r badger::badge_last_commit("jlaria/s2net")`
 `r badger::badge_cran_release("s2net", "orange")`
