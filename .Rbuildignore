@@ -9,3 +9,5 @@
 ^\.Rproj\.user$
 ^cran-comments\.md$
 ^\.github$
+^.devcontainer$
+^docker-compose.yml$
