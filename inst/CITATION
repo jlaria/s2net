@@ -1,6 +1,6 @@
 citHeader("To cite s2net in publications use:")
 
-bibentry(entry = "Article",
+bibentry(bibtype = "Article",
          title  = "A generalized linear joint trained framework for semi-supervised learning of sparse features",
          author       = c("Laria, Juan C.","Clemmensen, Line H.","Ersbol, Bjarne K.", "Delgado-Gomez, David"),
          journal      = "Mathematics",
@@ -9,10 +9,5 @@ bibentry(entry = "Article",
          number       = "16",
          pages        = "3001",
          url          = "https://doi.org/10.3390/math10163001",
-         doi          = "10.3390/math10163001",
-
-         textVersion  = paste("Laria J. et. al.",
-                              '"A generalized linear joint trained framework for semi-supervised learning of sparse feature"',
-                              "Mathematics",
-                              "2022")
+         doi          = "10.3390/math10163001"
 )
