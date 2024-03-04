@@ -2,7 +2,7 @@ Package: s2net
 Type: Package
 Title: The Generalized Semi-Supervised Elastic-Net
 Version: 1.0.5
-Date: 2022-06-30
+Date: 2024-03-04
 Authors@R: c(person("Juan C.",
            "Laria",,
            role = c("aut", "cre"),

@@ -1,20 +1,18 @@
 citHeader("To cite s2net in publications use:")
 
-citEntry(entry = "Article",
-         title        = "A generalized elastic-net for semi-supervised learning of sparse features",
-         author       = personList(as.person("Juan C. Laria"),
-                                   as.person("Line H. Clemmensen"),
-                                   as.person("Bjarne K. Ersbol")),
-         journal      = ".",
-         year         = "2020",
-         volume       = "[in-press]",
-         number       = "",
-         pages        = "",
-         url          = "",
-         doi          = "",
+bibentry(entry = "Article",
+         title  = "A generalized linear joint trained framework for semi-supervised learning of sparse features",
+         author       = c("Laria, Juan C.","Clemmensen, Line H.","Ersbol, Bjarne K.", "Delgado-Gomez, David"),
+         journal      = "Mathematics",
+         year         = "2022",
+         volume       = "10",
+         number       = "16",
+         pages        = "3001",
+         url          = "https://doi.org/10.3390/math10163001",
+         doi          = "10.3390/math10163001",
 
          textVersion  = paste("Laria J. et. al.",
-                              '"A generalized elastic-net for semi-supervised learning of sparse features"',
-                              "[in-press]",
-                              "")
+                              '"A generalized linear joint trained framework for semi-supervised learning of sparse feature"',
+                              "Mathematics",
+                              "2022")
 )
