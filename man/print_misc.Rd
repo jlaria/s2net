@@ -20,7 +20,7 @@ Very simple print methods to show basic information about these simple S3 object
 %%     ~~Describe \code{x} here~~
 S3 object of class \code{s2Data} or \code{s2Fista}
 }
-  \item{\dots}{
+  \item{\dots}{ other parameters passed to print
 %%     ~~Describe \code{\dots} here~~
 }
 }

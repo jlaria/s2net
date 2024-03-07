@@ -30,9 +30,9 @@ The unlabeled data (optional). Could be a \code{matrix} or \code{data.frame}.
 %%     ~~Describe \code{preprocess} here~~
 Should the input data be pre-processed? Possible values are: 
 
-\code{TRUE}{ (default) The data is converted to a matrix. Factor variables are automatically coded using \code{\link{model.matrix}}. The data is scaled, and constant columns are removed.}
+\code{TRUE} (default) The data is converted to a matrix. Factor variables are automatically coded using \code{\link{model.matrix}}. The data is scaled, and constant columns are removed.
 
-\code{FALSE}{ Do nothing. Keep in mind that the theoretical framework assumes that \code{xL} is centered. Unless you are absolutely sure, avoid this.}
+\code{FALSE} Do nothing. Keep in mind that the theoretical framework assumes that \code{xL} is centered. Unless you are absolutely sure, avoid this.
 
 Another object of class \code{s2Data} that was obtained from similar data (same original variables). This is useful when using train/validation sets, to apply the validation data the same transformation as train data. 
 }

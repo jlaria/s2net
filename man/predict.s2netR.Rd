@@ -26,7 +26,7 @@ A matrix with the data to make predictions. It should be in the same scale as th
 %%     ~~Describe \code{type} here~~
 Type of predictions. One of \code{"default"} (figure it out from the train data), \code{"response", "probs", "class"}.
 }
-  \item{...}{
+  \item{...}{ other parameters passed to predict
 %%     ~~Describe \code{type} here~~
 }
 }
